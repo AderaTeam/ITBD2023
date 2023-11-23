@@ -20,7 +20,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <Context.Provider value={{UStore}}>
-      <MantineProvider>
+      <MantineProvider
+        theme={{
+          fontFamily: 'Manrope, sans-serif'
+        }}
+      >
         <App/>
       </MantineProvider>
     </Context.Provider>

@@ -104,6 +104,8 @@ html {
 	width: 100%;
   height: 100%;
 	overflow-x: hidden;
+  color: #A6A7AB;
+  font-family: 'Manrope', sans-serif;
 }
 
 .wrapper {
@@ -112,8 +114,4 @@ html {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.body {
-  color: #A6A7AB;
 }
