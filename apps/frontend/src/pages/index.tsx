@@ -3,6 +3,7 @@ import { Context } from "main";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { STATISTICS_ROUTE } from "shared/constants/const";
 import { authRoutes, publicRoutes } from "shared/constants/routes";
 import NavbarNested from "widgets/Navbar/Navbar";
 
@@ -14,11 +15,15 @@ export const Routing = observer(() => {
   }
 
   if (UStore.isAuth && (location.pathname === '/login' || location.pathname === '/registration')) {
-    return <Navigate to='/' replace/>
+    return <Navigate to={STATISTICS_ROUTE} replace/>
+  }
+
+  if (location.pathname === '/') {
+    return <Navigate to={STATISTICS_ROUTE}/>
   }
 
   return (
-    <Flex className="wrapper" bg={'gray.0'} style={{height: '100vh'}}>
+    <Flex className="wrapper" bg={'dark.9'} style={{height: '100vh'}}>
       <Flex>
         {(UStore.isAuth && (location.pathname !== '/login' && location.pathname !== '/registration')) 
         ? <NavbarNested/> : <></>}

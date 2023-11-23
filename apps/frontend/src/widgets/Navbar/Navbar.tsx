@@ -7,7 +7,7 @@ import { IconLogout } from '@tabler/icons-react';
 
 const useStyles = createStyles(() => ({
     navbar: {
-        background: '#ffff',
+        background: '#1A1B1E',
         position: 'sticky',
         top: 0,
         zIndex: 10000,
@@ -45,9 +45,15 @@ const NavbarNested = () => {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <Flex align={'center'}>
+        <Flex align={'center'} style={{color: '#909296'}}>
           Аналитик
-          <IconLogout width={16} stroke={1.5} style={{marginLeft: '9px', cursor: 'pointer'}} onClick={() => UStore.logout()}/>
+          <IconLogout 
+            width={16} 
+            stroke={1.5} 
+            style={{marginLeft: '9px', cursor: 'pointer'}} 
+            onClick={() => UStore.logout()}
+            color='#2C2E33'
+          />
         </Flex>
       </Navbar.Section>
     </Navbar>

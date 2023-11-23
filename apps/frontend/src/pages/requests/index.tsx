@@ -1,6 +1,6 @@
 import AdminWrapper from "shared/components/Wrappers/AdminWrapper";
 
-const StatisticsPage = () => {
+const RequestPage = () => {
 
   return (
     <AdminWrapper>
@@ -10,4 +10,4 @@ const StatisticsPage = () => {
   );
 }
 
-export default StatisticsPage;
+export default RequestPage;

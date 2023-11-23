@@ -10,18 +10,18 @@ interface styleProps {
 const useStyles = createStyles((theme, {location, path}: styleProps) => ({
 	link: {
 		width: '204px',
-		borderRadius: '8px',
-		padding: '12px 16px',
+		borderRadius: '12px',
+		padding: '12px 18px',
 		transition: 'all 0.2s',
-		color: location === path ? '#ffff' : theme.colors.gray[8],
+		color: location === path ? theme.colors.dark[9] : theme.colors.dark[0],
 		svg: {
-			color:  location === path ? '#ffff' : theme.colors.gray[5],
+			color:  location === path ? theme.colors.dark[9] : theme.colors.dark[0],
 			transition: 'all 0.2s',
 		},
 		'&:hover': {
-			borderRadius: '8px',
-			background: theme.colors.indigo[7],
-			color: '#ffff',
+			borderRadius: '12px',
+			background: theme.colors.grape[5],
+			color: '#101113',
 			svg: {
 				color: '#ffff',
 			},

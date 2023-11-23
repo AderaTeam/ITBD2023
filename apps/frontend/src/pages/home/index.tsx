@@ -1,4 +1,4 @@
-import UserWrapper from "shared/components/Wrappers/UserWrapper";
+import UserWrapper from "shared/components/Wrappers/UserWrapper/UserWrapper";
 
 const HomePage = () => {
 
