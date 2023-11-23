@@ -1,13 +1,13 @@
 import AdminWrapper from "shared/components/Wrappers/AdminWrapper";
 
-const RequestPage = () => {
+const AnalysisPage = () => {
 
   return (
-    <AdminWrapper>
+    <AdminWrapper title="Анализ нового обращения">
       <>123</>
       <></>
     </AdminWrapper>
   );
 }
 
-export default RequestPage;
+export default AnalysisPage;

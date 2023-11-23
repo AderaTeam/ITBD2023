@@ -3,14 +3,15 @@ import { Context } from "main";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { STATISTICS_ROUTE } from "shared/constants/const";
+import { ANALYSIS_ROUTE, STATISTICS_ROUTE } from "shared/constants/const";
 import { authRoutes, publicRoutes } from "shared/constants/routes";
-import NavbarNested from "widgets/Navbar/Navbar";
+import NavbarNested from "widgets/navbar/Navbar";
 
 export const Routing = observer(() => {
   const { UStore } = useContext(Context);
 
-  if (!UStore.isAuth && location.pathname === '/') {
+  if (!UStore.isAuth && (location.pathname === '/' || location.pathname === ANALYSIS_ROUTE || 
+  location.pathname === STATISTICS_ROUTE)) {
     return <Navigate to='/login' replace/>
   }
 

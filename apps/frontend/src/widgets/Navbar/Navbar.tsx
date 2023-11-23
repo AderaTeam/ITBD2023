@@ -3,27 +3,28 @@ import NavbarLinksGroup from './NavbarLinksGroup';
 import { useContext } from 'react';
 import { Context } from '../../main';
 import { IconLogout } from '@tabler/icons-react';
+import logo from 'shared/assets/logo.svg';
 
 
 const useStyles = createStyles(() => ({
-    navbar: {
-        background: '#1A1B1E',
-        position: 'sticky',
-        top: 0,
-        zIndex: 10000,
-    },
+  navbar: {
+    background: '#1A1B1E',
+    position: 'sticky',
+    top: 0,
+    zIndex: 10000,
+  },
 
-    header: {
-        padding: '40px 32px 0px',
-    },
+  header: {
+    padding: '40px 32px 0px',
+  },
 
-    links: {
-        padding: '40px 32px',
-    },
+  links: {
+    padding: '40px 32px',
+  },
 
-    footer: {
-        padding: '0px 32px 40px'
-    },
+  footer: {
+    padding: '0px 32px 40px'
+  },
 }));
 
 const NavbarNested = () => {
@@ -37,7 +38,7 @@ const NavbarNested = () => {
       height={'100vh'} 
     >
       <Navbar.Section className={classes.header}>
-        123
+        <Image src={logo}/>
       </Navbar.Section>
 
       <Navbar.Section grow className={classes.links}>

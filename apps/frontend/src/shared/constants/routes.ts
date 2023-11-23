@@ -1,22 +1,21 @@
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, REQUESTS_ROUTE, STATISTICS_ROUTE } from 'shared/constants/const';
-import { IconDeviceAnalytics, IconHistory } from '@tabler/icons-react';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, ANALYSIS_ROUTE, STATISTICS_ROUTE } from 'shared/constants/const';
 import { lazy } from 'react';
 
 const auth = lazy(() => import('pages/auth'));
 const statistics = lazy(() => import('pages/statistics'));
-const requests = lazy(() => import('pages/requests'));
+const analysis = lazy(() => import('pages/analysis'));
 
 export const authRoutes = [
+  {
+    path: ANALYSIS_ROUTE,
+    Component: analysis,
+    title: 'Aнализ обращения',
+    isAdmin: true,
+  },
   {
     path: STATISTICS_ROUTE,
     Component: statistics,
     title: 'Статистика',
-    isAdmin: true,
-  },
-  {
-    path: REQUESTS_ROUTE,
-    Component: requests,
-    title: 'Список обращений',
     isAdmin: true,
   },
 ];
