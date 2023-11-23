@@ -1,18 +1,35 @@
-import { Stack } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 import { Card } from "shared/components/Card";
 import { Button } from "shared/components/Buttons";
 import { TextArea } from "shared/components/TextArea";
-import { Segment } from "shared/components/Segment";
+import { Controller, useForm } from 'react-hook-form';
+
+import style from './AnalysisForm.module.scss';
+import { FileInput } from "shared/components/FileInput";
 
 export const AnalysisForm = () => {
+  const {control, watch} = useForm();
 
   return (
     <Stack spacing={32}>
       <Card>
         <Stack spacing={20}>
-          <Segment data={['12', '13']}/>
-          <TextArea/>
-          <Button title={`Анализировать`}/>
+          <Controller
+            name="text"
+            control={control}
+            render={({field}) => 
+              <TextArea field={field} disabled={watch('file')}/>
+            }
+          />
+          <Text className={style.text} color="dark.5">или...</Text>
+          <Controller
+            name="file"
+            control={control}
+            render={({field}) => 
+              <FileInput field={field} disabled={watch('text')}/>
+            }
+          />
+          <Button disabled={!watch('text') && !watch('file')} title={`Анализировать`}/>
         </Stack>
       </Card>
     </Stack>

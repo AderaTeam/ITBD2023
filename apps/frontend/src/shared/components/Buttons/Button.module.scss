@@ -5,5 +5,8 @@
   border-radius: 16px;
   height: fit-content;
   width: fit-content;
-  color: white
+  color: white;
+  &:disabled {
+    background: #25262B;
+  }
 }

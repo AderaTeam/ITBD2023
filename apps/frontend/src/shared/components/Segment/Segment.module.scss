@@ -1,6 +1,9 @@
 .segment {
   div {
-
+    &:first-of-type {
+      background: #25262B;
+    }
+    
   }
 
   label {

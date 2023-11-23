@@ -4,13 +4,15 @@ import style from './Button.module.scss';
 interface Props {
   title: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  color?: string
+  color?: string,
+  disabled?: boolean,
 }
 
-export const Button = ({title, onClick, color="grape.6"}: Props) => {
+export const Button = ({title, onClick, color="grape.6", disabled}: Props) => {
 
   return (
     <MantineButton
+      disabled={disabled}
       color={color}
       onClick={onClick}
       p={'16px 24px'}

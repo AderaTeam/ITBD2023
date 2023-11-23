@@ -13,15 +13,18 @@ const useStyles = createStyles((theme, {location, path}: styleProps) => ({
 		borderRadius: '12px',
 		padding: '12px 18px',
 		transition: 'all 0.2s',
-		color: location === path ? theme.colors.dark[9] : theme.colors.dark[0],
+		color: theme.colors.dark[0],
 		svg: {
-			color:  location === path ? theme.colors.dark[9] : theme.colors.dark[0],
+			color:  theme.colors.dark[0],
 			transition: 'all 0.2s',
 		},
+    fontSize: '16px',
+    fontWeight: 500,
+    lineHeight: '24px',
 		'&:hover': {
 			borderRadius: '12px',
-			background: theme.colors.grape[5],
-			color: '#101113',
+			background: theme.colors.dark[4],
+			color: '#C1C2C5',
 			svg: {
 				color: '#ffff',
 			},
