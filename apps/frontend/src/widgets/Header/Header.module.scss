@@ -1,0 +1,22 @@
+.container {
+  width: 1440px;
+  margin:  0 auto;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-wrapper {
+  background: white;
+}
+
+.navbar-wrapper {
+  margin: 0 auto;
+}
+
+.navItem {
+  margin-right: 32px;
+  &:last-child {
+    margin-right: 0px;
+  }
+}
