@@ -5,13 +5,13 @@ import { Context } from '../../main';
 import { IconLogout } from '@tabler/icons-react';
 import logo from 'shared/assets/logo.svg';
 
-
 const useStyles = createStyles(() => ({
   navbar: {
     background: '#1A1B1E',
     position: 'sticky',
     top: 0,
     zIndex: 10000,
+    borderRight: 'none',
   },
 
   header: {
@@ -32,8 +32,8 @@ const NavbarNested = () => {
   const { UStore } = useContext(Context);
 
   return (
-    <Navbar 
-      width={{ base: '268px' }}  
+    <Navbar
+      width={{ base: '249px' }}  
       className={classes.navbar}
       height={'100vh'} 
     >
