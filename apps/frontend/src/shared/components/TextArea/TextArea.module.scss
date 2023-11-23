@@ -1,0 +1,16 @@
+.textarea {
+  textarea {
+    background: #25262B;
+    border-radius: 16px;
+    padding: 18px 24px;
+    color: #C1C2C5;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    height: 108px;
+    &:focus-within {
+      border-color: #CC5DE8;
+    }
+  }
+}

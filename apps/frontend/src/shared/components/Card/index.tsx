@@ -4,13 +4,14 @@ import style from './Card.module.scss';
 interface Props {
   p?: string;
   spasing?: number;
-  children?: React.ReactNode[]; 
+  children?: React.ReactNode; 
 }
 
 export const Card = ({p = '32px', spasing=16, children}: Props) => {
 
   return (
     <Stack 
+      p={p}
       spacing={spasing}
       bg={'dark.7'}
       className={style.card}
