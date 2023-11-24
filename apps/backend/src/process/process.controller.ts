@@ -21,9 +21,9 @@ export class ProcessController {
         return this.processService.saveRecord(data)
     }
     @Post(':id')
-    public async editRecord(@Body() data: ResultDto)
+    public async editRecord(@Param('id') id: number, @Body() data: ResultDto)
     {
-        return this.processService.editRecord(data.id, data)
+        return this.processService.editRecord(id, data)
     }
 
     @Get('history')
