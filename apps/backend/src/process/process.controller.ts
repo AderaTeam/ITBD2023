@@ -21,9 +21,16 @@ export class ProcessController {
         return this.processService.saveRecord(data)
     }
 
+    @Get('history')
+    public async getHistory()
+    {
+        return this.processService.getHistory()
+    }
+
     @Get(':id')
     public async getRecord(@Param('id')id: number)
     {
         return this.processService.getRecord(id)
     }
+
 }

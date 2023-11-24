@@ -14,6 +14,11 @@ export class ProcessService {
         private tagRepository: Repository<Tag>,
     ){}
 
+    public async getHistory()
+    {
+        return this.resultRepository.find({order:{dateMaking:'DESC'}})
+    }
+
     public async processText(text: string)
     {
         const record = {
@@ -47,21 +52,31 @@ export class ProcessService {
 
     public async saveRecord(record: ResultDto)
     {
-        record.dateMaking = new Date().toString()
+        const date = new Date();
+
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        let minutes = date.getMinutes()
+        let hours = date.getHours()
+
+        record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes}`;
         Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
         for (const tag of record.tags)
         {
+            const name: string = tag.name
             Logger.log(tag)
-            if ((await this.tagRepository.find({where: {name: tag.toString()}})).length > 0)
+            if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
             {
-                rightTags.push((await this.tagRepository.findOne({where: {name: tag.toString()}})))
+                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
             }
             else
             {
-                const currentTag = this.tagRepository.create({name: tag.toString()})
+                const currentTag = this.tagRepository.create({name: name.toString()})
                 await this.tagRepository.insert(currentTag)
-                rightTags.push((await this.tagRepository.findOne({where: {name: tag.toString()}})))
+                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
             }
         }
         Logger.log(rightTags)
