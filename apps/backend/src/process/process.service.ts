@@ -120,8 +120,9 @@ export class ProcessService {
         record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
         Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
-        if (record.tags)
+        if (record.tags != undefined)
         {
+            Logger.log(record.tags)
             for (const tag of record.tags)
             {
                 const name: string = tag.name
