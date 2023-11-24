@@ -82,8 +82,9 @@ export class ProcessService {
         let record = {}
         const response = await axios.post('http://178.170.192.87:8003/items', {
             data: [text]
-          })
-          record = {
+        })
+        Logger.log(response)
+        record = {
             "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
             "address": response.data.place ?? null,
@@ -92,7 +93,7 @@ export class ProcessService {
             "group": response.data.theme_group,
             "tags": response.data.problem ?? null
             }
-          return this.saveRecord(record)
+        return this.saveRecord(record)
 
     }
 
