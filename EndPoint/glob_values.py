@@ -4,6 +4,8 @@ from nltk.corpus import stopwords
 from string import punctuation
 import torch
 from transformers import AutoTokenizer, AutoModel
+import json
+
 
 rus_stop_words = stopwords.words("russian")
 symbols = list(punctuation) + ['\t', '\n', '\r',
@@ -83,7 +85,9 @@ theme_classes = {'Безопасность': 0,
  'Социальное обслуживание и защита': 9}
 
 exe_nums = {exe_classes[i]: i for i in exe_classes}
-theme_nums = {theme_classes[i]: i for i in theme_classes}
+theme_group_nums = {theme_classes[i]: i for i in theme_classes}
+with open('./t.json', 'r') as f:
+    themes_num = json.load(f)
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
 sentence_vectorizer = AutoModel.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
@@ -152,14 +156,22 @@ model_exe = model_GRU = RecGRUExample(
 ).double().to('cuda')
 model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe22222.pt'), strict=False)
 model_exe.eval()
-model_theme = model_GRU = RecGRUExample(
+model_theme_group = model_GRU = RecGRUExample(
     size_of_sample=384,
     num_of_samples=128,
     output_size_of_input_layer=50,
     output_layer_size=10,
     alpha=0.07
 ).double().to('cuda')
-model_theme.load_state_dict(torch.load('./Models/my_model_gru_group_theme22222.pt'), strict=False)
-model_theme.eval()
+model_theme_group.load_state_dict(torch.load('./Models/my_model_gru_group_theme22222.pt'), strict=False)
+model_theme_group.eval()
+
+model_theme = model_GRU = RecGRUExample(
+    size_of_sample=384,
+    num_of_samples=128,
+    output_size_of_input_layer=50,
+    output_layer_size=195,
+    alpha=0.07
+).double().to('cuda')
 # model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe.bin'))
 # model_exe.eval()
