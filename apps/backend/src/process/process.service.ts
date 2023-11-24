@@ -85,6 +85,14 @@ export class ProcessService {
         })
 
         response = response.data
+        let tags = []
+        if (response.data[text].problem)
+        {
+            for (const tag of response.data[text].problem)
+            {
+                tags.push({name: tag})
+            }
+        }
         record = {
             "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
@@ -92,7 +100,7 @@ export class ProcessService {
             "department":response.data[text].executor ?? null,
             "category": response.data[text].theme,
             "group": response.data[text].theme_group,
-            "tags": response.data[text].problem ?? null
+            "tags": {name: tags ?? null}
             }
         return this.saveRecord(record)
 
