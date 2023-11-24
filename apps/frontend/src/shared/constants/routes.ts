@@ -1,9 +1,10 @@
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, ANALYSIS_ROUTE, STATISTICS_ROUTE } from 'shared/constants/const';
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, ANALYSIS_ROUTE, STATISTICS_ROUTE, HISTORY_ROUTE } from 'shared/constants/const';
 import { lazy } from 'react';
 
 const auth = lazy(() => import('pages/auth'));
 const statistics = lazy(() => import('pages/statistics'));
 const analysis = lazy(() => import('pages/analysis'));
+const history = lazy(() => import('pages/history'));
 
 export const authRoutes = [
   {
@@ -16,6 +17,12 @@ export const authRoutes = [
     path: STATISTICS_ROUTE,
     Component: statistics,
     title: 'Статистика',
+    isAdmin: true,
+  },
+  {
+    path: HISTORY_ROUTE,
+    Component: history,
+    title: 'История',
     isAdmin: true,
   },
 ];

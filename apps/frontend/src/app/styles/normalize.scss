@@ -106,12 +106,18 @@ html {
 	overflow-x: hidden;
   color: #A6A7AB;
   font-family: 'Manrope', sans-serif;
+  background: #101113;
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .wrapper {
   width: 100%;
   min-height: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  
 }

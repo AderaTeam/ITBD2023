@@ -20,7 +20,7 @@ export const Routing = observer(() => {
   }
 
   if (location.pathname === '/') {
-    return <Navigate to={STATISTICS_ROUTE}/>
+    return <Navigate to={ANALYSIS_ROUTE}/>
   }
 
   return (
