@@ -13,10 +13,8 @@ export default class AnalysisStore {
     this.isLoading = bool;
   }
 
-  setCurentStep() {
-    if (this.curentStep < 2) {
-      this.curentStep = this.curentStep + 1;
-    }
+  setCurentStep(step: number) {
+    this.curentStep = step;
   }
 
   async setAnalysis(text?: string) {

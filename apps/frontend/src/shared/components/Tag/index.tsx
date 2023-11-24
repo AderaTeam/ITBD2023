@@ -7,9 +7,10 @@ interface Props {
   p?: string;
   center?: boolean;
   children?: React.ReactNode;
+  color?: string;
 }
 
-export const Tag = ({ text, w, h, p, center, children }: Props) => {
+export const Tag = ({ text, w, h, p, center, children, color }: Props) => {
   return (
     <div
       style={{
@@ -17,6 +18,8 @@ export const Tag = ({ text, w, h, p, center, children }: Props) => {
         height: h,
         padding: p,
         justifyContent: center ? 'center' : 'flex-start',
+        background: color,
+        color: color && '#C1C2C5',
       }}
       className={style.tag}
     >

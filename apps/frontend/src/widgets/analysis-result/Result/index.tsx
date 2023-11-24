@@ -44,7 +44,8 @@ export const Result = ({ result, index }: Props) => {
       ) : (
         <Edit control={control} result={result} />
       )}
-      <Tags tags={result.tags} />
+
+      <Tags tags={result?.tags} />
       {isEdit && (
         <Button onClick={onSubmit} outline title="Сохранить результат" />
       )}
