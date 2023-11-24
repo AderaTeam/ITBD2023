@@ -110,22 +110,26 @@ export class ProcessService {
         record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
         Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
-        for (const tag of record.tags)
+        if (record.tags)
         {
-            const name: string = tag.name
-            Logger.log(tag)
-            if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
+            for (const tag of record.tags)
             {
-                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+                const name: string = tag.name
+                Logger.log(tag)
+                if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
+                {
+                    rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+                }
+                else
+                {
+                    const currentTag = this.tagRepository.create({name: name.toString()})
+                    await this.tagRepository.insert(currentTag)
+                    rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+                }
             }
-            else
-            {
-                const currentTag = this.tagRepository.create({name: name.toString()})
-                await this.tagRepository.insert(currentTag)
-                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
-            }
+            Logger.log(rightTags)
         }
-        Logger.log(rightTags)
+        
 
         const currentRecord = this.resultRepository.create({...record, tags: rightTags})
         const id = (await this.resultRepository.insert(currentRecord)).identifiers[0].id
