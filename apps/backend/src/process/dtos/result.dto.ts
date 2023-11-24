@@ -4,6 +4,7 @@ export class ResultDto
 {
     id?: number
     date?: string
+    dateMaking?: string
     text: string
     address?: string
     category: string
