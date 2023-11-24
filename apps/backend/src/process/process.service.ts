@@ -86,7 +86,7 @@ export class ProcessService {
 
         response = response.data
         let tags = []
-        if (response.data[text].problem)
+        if (response.data[text].problem.length > 0)
         {
             for (const tag of response.data[text].problem)
             {
@@ -120,7 +120,7 @@ export class ProcessService {
         record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
         Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
-        if (record.tags != undefined)
+        if (record.tags != undefined && record.tags.length > 0)
         {
             Logger.log(record.tags)
             for (const tag of record.tags)
