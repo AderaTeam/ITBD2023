@@ -13,7 +13,8 @@ export default class AnalysisStore {
   }
 
   setCurentStep() {
-    this.curentStep = this.curentStep + 1;
+    if (this.curentStep < 2) {
+      this.curentStep = this.curentStep + 1;
+    }
   }
-
 }

@@ -1,3 +1,15 @@
 .mantine-ebrmep {
   border-right: none;
 }
+
+.mantine-FileInput-rightSection {
+  width: 130px;
+  .mantine-UnstyledButton-root {
+    width: 110px;
+    border: none;
+    color: #5c5f66;
+    &::after {
+      content: 'Отчистить';
+    }
+  }
+}

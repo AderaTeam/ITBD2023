@@ -1,15 +1,21 @@
-import { Button as MantineButton} from '@mantine/core';
+import { Button as MantineButton } from '@mantine/core';
 import style from './Button.module.scss';
 
 interface Props {
-  title: string;
+  title?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  color?: string,
-  disabled?: boolean,
+  color?: string;
+  disabled?: boolean;
+  children?: React.ReactNode;
 }
 
-export const Button = ({title, onClick, color="grape.6", disabled}: Props) => {
-
+export const Button = ({
+  title,
+  onClick,
+  color = 'grape.6',
+  disabled,
+  children,
+}: Props) => {
   return (
     <MantineButton
       disabled={disabled}
@@ -18,7 +24,7 @@ export const Button = ({title, onClick, color="grape.6", disabled}: Props) => {
       p={'16px 24px'}
       className={style.button}
     >
-        {title}
+      {children ? children : title}
     </MantineButton>
-  )
-}
+  );
+};

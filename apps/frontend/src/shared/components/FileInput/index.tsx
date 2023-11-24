@@ -1,16 +1,17 @@
-import { FileInput as MantineFileInput } from "@mantine/core";
+import { FileInput as MantineFileInput } from '@mantine/core';
 import style from './FileInput.module.scss';
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps, FieldValues } from 'react-hook-form';
+import { IconClearAll } from '@tabler/icons-react';
 
 interface Props {
-  field: ControllerRenderProps<FieldValues, "file">,
-  disabled?: boolean, 
+  field: ControllerRenderProps<FieldValues, 'file'>;
+  disabled?: boolean;
 }
 
-export const FileInput = ({disabled, field}: Props) => {
-
+export const FileInput = ({ disabled, field }: Props) => {
   return (
     <MantineFileInput
+      clearable
       {...field}
       disabled={disabled}
       label="Загрузка"
@@ -18,4 +19,4 @@ export const FileInput = ({disabled, field}: Props) => {
       className={style.input}
     />
   );
-}
+};
