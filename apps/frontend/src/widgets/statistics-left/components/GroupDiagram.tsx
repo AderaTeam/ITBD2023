@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Card } from 'shared/components/Card';
 import { Select } from 'shared/components/Select';
 
-import style from './StatisticsRight.module.scss';
+import style from './GroupDiagram.module.scss';
 import { group } from 'shared/constants/group';
 import { useEffect, useState } from 'react';
 
@@ -11,26 +11,24 @@ import {
   Chart as ChartJS,
   Tooltip,
   Legend,
+  BarElement,
   CategoryScale,
   LinearScale,
   Title,
-  PointElement,
-  LineElement,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 ChartJS.defaults.scale.grid.display = false;
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-export const StatisticsRight = () => {
+export const GroupDiagram = () => {
   const { control, watch } = useForm();
   const [diagramData, setDiagramData] = useState<{
     label?: string[] | undefined;
@@ -56,14 +54,13 @@ export const StatisticsRight = () => {
         label: watch('group'),
         data: diagramData?.value,
         backgroundColor: '#ABE85D',
-        borderColor: '#373A40',
         borderRadius: 16,
       },
     ],
   };
 
   return (
-    <Card h={576}>
+    <Card h={519}>
       <Stack spacing={24}>
         <Text className={style.title}>Статистика по месяцам</Text>
         <Controller
@@ -80,8 +77,8 @@ export const StatisticsRight = () => {
             />
           )}
         />
-        <Stack h={340}>
-          <Line data={data} />
+        <Stack h={290}>
+          <Bar data={data} />
         </Stack>
       </Stack>
     </Card>
