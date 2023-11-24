@@ -81,7 +81,7 @@ export class ProcessService {
 
         let record = {}
         axios.post('http://178.170.192.87:8003/items', {
-            items: [text]
+            data: [text]
           })
           .then(function (response) {
             record = {
