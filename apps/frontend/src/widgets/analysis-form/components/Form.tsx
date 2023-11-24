@@ -1,7 +1,11 @@
 import { Stack, Text } from '@mantine/core';
-import { Controller, useForm } from 'react-hook-form';
-import { Context } from 'main';
-import { useContext } from 'react';
+import {
+  Control,
+  Controller,
+  FieldValues,
+  UseFormWatch,
+} from 'react-hook-form';
+import { MouseEventHandler } from 'react';
 
 import { TextArea } from 'shared/components/TextArea';
 import { FileInput } from 'shared/components/FileInput';
@@ -9,14 +13,13 @@ import { Button } from 'shared/components/Buttons';
 
 import style from './Form.module.scss';
 
-export const Form = () => {
-  const { control, watch, handleSubmit } = useForm();
-  const { AStore } = useContext(Context);
+interface Props {
+  control: Control<FieldValues, any>;
+  watch: UseFormWatch<FieldValues>;
+  onSubmit: MouseEventHandler<HTMLButtonElement>;
+}
 
-  const onSubmit = handleSubmit((formData) => {
-    AStore.setCurentStep();
-  });
-
+export const Form = ({ control, watch, onSubmit }: Props) => {
   return (
     <Stack spacing={20}>
       <Controller

@@ -52,7 +52,7 @@ export const Info = () => {
         </Stack>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Телефон</Text>
-          <Text className={style.text}>Не выявлена</Text>
+          <Text className={style.text}>Не выявлен</Text>
         </Stack>
       </Flex>
       <Tags />
