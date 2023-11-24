@@ -13,3 +13,79 @@
     }
   }
 }
+
+.mantine-Select-dropdown {
+  background: #25262b;
+  border-radius: 12px;
+  border-color: #2c2e33;
+  display: block;
+  div {
+    color: #c1c2c5;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    background: #25262b;
+    border-radius: 12px;
+    &::selection {
+      background: #2c2e33;
+      border-radius: 12px;
+      border-color: #2c2e33;
+    }
+    &:hover {
+      background: #2c2e33;
+      border-radius: 12px;
+      border-color: #2c2e33;
+    }
+  }
+}
+
+.mantine-Select-item {
+  background: #25262b;
+  border-radius: 12px;
+  border-color: #2c2e33;
+  div {
+    color: #c1c2c5;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    background: #25262b;
+    border-radius: 12px;
+    &::selection {
+      background: #2c2e33;
+      border-radius: 12px;
+      border-color: #2c2e33;
+    }
+    &:hover {
+      background: #2c2e33;
+      border-radius: 12px;
+      border-color: #2c2e33;
+    }
+  }
+}
+
+.mantine-Select-itemsWrapper {
+  background: #25262b;
+  border-radius: 12px;
+  border-color: #2c2e33;
+  div {
+    color: #c1c2c5;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    background: #25262b;
+    border-radius: 12px;
+    &::selection {
+      background: #2c2e33;
+      border-radius: 12px;
+      border-color: #2c2e33;
+    }
+    &:hover {
+      background: #2c2e33;
+      border-radius: 12px;
+      border-color: #2c2e33;
+    }
+  }
+}

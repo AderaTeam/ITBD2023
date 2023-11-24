@@ -11,7 +11,7 @@ export const AnalysisResult = ({ result }: Props) => {
   return (
     <Stack spacing={16}>
       {result.map((item, index) => (
-        <Card>
+        <Card key={item.id}>
           <Result result={item} index={index} />
         </Card>
       ))}

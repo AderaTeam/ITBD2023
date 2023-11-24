@@ -16,6 +16,7 @@ const AnalysisPage = () => {
   const { control, watch, handleSubmit } = useForm();
   const [result, setResult] = useState<IResult[]>([
     {
+      id: 2,
       text: 'Добрый день! А врача на дом можно будет вызвать?',
       address: 'Магистральная 50',
       group: 'Здравоохранение/Медицина',
@@ -24,6 +25,7 @@ const AnalysisPage = () => {
       tags: ['врача', 'вызвать'],
     },
     {
+      id: 3,
       text: 'А второй люк остался открытым, и там не видно дна, т. е. Глубины большой.',
       address: 'Ленина 20',
       group: 'Благоустройство',

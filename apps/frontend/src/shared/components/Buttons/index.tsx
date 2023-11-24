@@ -7,6 +7,7 @@ interface Props {
   color?: string;
   disabled?: boolean;
   children?: React.ReactNode;
+  outline?: boolean;
 }
 
 export const Button = ({
@@ -15,12 +16,20 @@ export const Button = ({
   color = 'grape.6',
   disabled,
   children,
+  outline,
 }: Props) => {
   return (
     <MantineButton
       disabled={disabled}
       color={color}
-      style={{ background: color }}
+      style={
+        outline
+          ? {
+              background: '#1A1B1E',
+              border: '2px solid #25262B',
+            }
+          : { background: color }
+      }
       onClick={onClick}
       p={'16px 24px'}
       className={style.button}

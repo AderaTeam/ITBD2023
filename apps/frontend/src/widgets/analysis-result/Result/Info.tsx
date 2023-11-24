@@ -1,6 +1,5 @@
 import { Flex, Stack, Text } from '@mantine/core';
 import style from './Result.module.scss';
-import { Tags } from './Tags';
 import { IResult } from 'shared/models/IResult';
 
 interface Props {
@@ -60,7 +59,6 @@ export const Info = ({ result }: Props) => {
           <Text className={style.text}>{'Не выявлен'}</Text>
         </Stack>
       </Flex>
-      <Tags tags={result.tags} />
     </Stack>
   );
 };

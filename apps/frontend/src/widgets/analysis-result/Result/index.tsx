@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { IResult } from 'shared/models/IResult';
 
 import style from './Result.module.scss';
+import { Tags } from './Tags';
+import { Button } from 'shared/components/Buttons';
+import { useForm } from 'react-hook-form';
 
 interface Props {
   result: IResult;
@@ -14,6 +17,11 @@ interface Props {
 
 export const Result = ({ result, index }: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const { control, handleSubmit } = useForm({ defaultValues: result });
+
+  const onSubmit = handleSubmit((formData) => {
+    console.log(formData);
+  });
 
   return (
     <Stack spacing={32}>
@@ -31,7 +39,15 @@ export const Result = ({ result, index }: Props) => {
           stroke={2}
         />
       </Flex>
-      {!isEdit ? <Info result={result} /> : <Edit result={result} />}
+      {!isEdit ? (
+        <Info result={result} />
+      ) : (
+        <Edit control={control} result={result} />
+      )}
+      <Tags tags={result.tags} />
+      {isEdit && (
+        <Button onClick={onSubmit} outline title="Сохранить результат" />
+      )}
     </Stack>
   );
 };
