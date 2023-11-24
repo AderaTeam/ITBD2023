@@ -1,5 +1,6 @@
 import { Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
 import { IResult } from 'shared/models/IResult';
 import HistoryServices from 'shared/services/HistoryServices';
@@ -8,6 +9,7 @@ import { HistoryTable } from 'widgets/history-table';
 
 const HistoryPage = () => {
   const [result, setResult] = useState<IResult[]>([]);
+  const { control, setValue, getValues } = useForm();
 
   useEffect(() => {
     HistoryServices.getHistory().then((response) => setResult(response.data));
@@ -16,8 +18,8 @@ const HistoryPage = () => {
   return (
     <AdminWrapper fullWidth>
       <Stack spacing={16}>
-        <HistoryButtonRow />
-        <HistoryTable result={result} />
+        <HistoryButtonRow result={result} getValues={getValues} />
+        <HistoryTable control={control} setValue={setValue} result={result} />
       </Stack>
       <></>
     </AdminWrapper>

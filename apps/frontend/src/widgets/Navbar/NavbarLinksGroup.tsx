@@ -1,7 +1,7 @@
 import { createStyles, Flex, Stack, Text } from '@mantine/core';
 import { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { ONE_ANALYSIS_ROUTE } from 'shared/constants/const';
+import { MAP_ROUTE, ONE_ANALYSIS_ROUTE } from 'shared/constants/const';
 import { authRoutes } from 'shared/constants/routes';
 interface styleProps {
   location: string;
@@ -61,7 +61,7 @@ const NavbarLink = ({ icon: Icon, path, title }: LinksProps) => {
 
 const NavbarLinksGroup = () => {
   const links = authRoutes.map((link) => {
-    if (link.path !== ONE_ANALYSIS_ROUTE) {
+    if (link.path !== ONE_ANALYSIS_ROUTE && link.path != MAP_ROUTE) {
       return <NavbarLink {...link} key={link.title} />;
     }
   });

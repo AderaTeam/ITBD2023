@@ -6,8 +6,8 @@ import UserStore from 'shared/store/UserStore';
 import AnalysisStore from 'shared/store/AnalysisStore';
 
 interface State {
-  UStore: UserStore,
-  AStore: AnalysisStore,
+  UStore: UserStore;
+  AStore: AnalysisStore;
 }
 
 const UStore = new UserStore();
@@ -22,15 +22,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <StrictMode>
-    <Context.Provider value={{UStore, AStore}}>
-      <MantineProvider
-        theme={{
-          fontFamily: 'Manrope, sans-serif'
-        }}
-      >
-        <App/>
-      </MantineProvider>
-    </Context.Provider>
-  </StrictMode>
+  <Context.Provider value={{ UStore, AStore }}>
+    <MantineProvider
+      theme={{
+        fontFamily: 'Manrope, sans-serif',
+      }}
+    >
+      <App />
+    </MantineProvider>
+  </Context.Provider>
 );

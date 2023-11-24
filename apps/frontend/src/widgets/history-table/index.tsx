@@ -1,18 +1,19 @@
 import { Stack } from '@mantine/core';
 import { HistoryTableHeader } from './components/HistoryTableHeader';
 import { HistoryList } from './components/HistoryList';
-import { useForm } from 'react-hook-form';
+import { Control, FieldValues, UseFormSetValue } from 'react-hook-form';
 import { IResult } from 'shared/models/IResult';
 import { useState } from 'react';
 
 interface Props {
   result: IResult[];
+  control: Control<FieldValues, any>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
-export const HistoryTable = ({ result }: Props) => {
+export const HistoryTable = ({ result, control, setValue }: Props) => {
   const allId = result.map((item) => `${item.id}`);
   const [all, setAll] = useState(false);
-  const { control, setValue } = useForm();
 
   const handleAllSelect = () => {
     setAll(!all);

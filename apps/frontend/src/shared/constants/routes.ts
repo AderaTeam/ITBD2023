@@ -5,6 +5,7 @@ import {
   STATISTICS_ROUTE,
   HISTORY_ROUTE,
   ONE_ANALYSIS_ROUTE,
+  MAP_ROUTE,
 } from 'shared/constants/const';
 import { lazy } from 'react';
 
@@ -12,6 +13,7 @@ const auth = lazy(() => import('pages/auth'));
 const statistics = lazy(() => import('pages/statistics'));
 const analysis = lazy(() => import('pages/analysis'));
 const history = lazy(() => import('pages/history'));
+const map = lazy(() => import('pages/map'));
 
 export const authRoutes = [
   {
@@ -35,6 +37,12 @@ export const authRoutes = [
   {
     path: HISTORY_ROUTE,
     Component: history,
+    title: 'История',
+    isAdmin: true,
+  },
+  {
+    path: MAP_ROUTE,
+    Component: map,
     title: 'История',
     isAdmin: true,
   },

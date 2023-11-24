@@ -19,10 +19,12 @@ const AnalysisPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
-  const getResult = (id: number) => {
+  const getResult = (id: number, step?: number) => {
     AnalysisServices.getAnalysisResult(id)
       .then((response) => {
         AStore.curentStep === 1
+          ? AStore.setCurentStep(2)
+          : step
           ? AStore.setCurentStep(2)
           : AStore.setCurentStep(1);
         setResult(response.data);
@@ -40,7 +42,7 @@ const AnalysisPage = () => {
   useEffect(() => {
     AStore.setCurentStep(0);
     if (id) {
-      getResult(+id);
+      getResult(+id, 1);
     }
   }, []);
 

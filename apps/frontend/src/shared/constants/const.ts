@@ -5,3 +5,4 @@ export const STATISTICS_ROUTE = '/statistics';
 export const ANALYSIS_ROUTE = '/analysis';
 export const ONE_ANALYSIS_ROUTE = '/analysis/:id';
 export const HISTORY_ROUTE = '/history';
+export const MAP_ROUTE = '/map';

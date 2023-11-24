@@ -12,6 +12,7 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/platform-express": "^10.0.2",
+    "@pbe/react-yandex-maps": "^1.2.5",
     "@swc/helpers": "~0.5.2",
     "@tabler/icons-react": "^2.42.0",
     "axios": "^1.0.0",
