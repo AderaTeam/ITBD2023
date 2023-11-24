@@ -5,14 +5,15 @@ import { Card } from 'shared/components/Card';
 
 interface Props {
   result: IResult[];
+  getResult: Function;
 }
 
-export const AnalysisResult = ({ result }: Props) => {
+export const AnalysisResult = ({ result, getResult }: Props) => {
   return (
     <Stack spacing={16}>
       {result.map((item, index) => (
         <Card key={item.id}>
-          <Result result={item} index={index} />
+          <Result result={item} getResult={getResult} index={index} />
         </Card>
       ))}
     </Stack>

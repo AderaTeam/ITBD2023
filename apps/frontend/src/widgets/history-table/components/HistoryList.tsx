@@ -1,10 +1,10 @@
 import { Checkbox, Stack } from '@mantine/core';
 import { HistoryItem } from './HistoryItem';
-import { IHistory } from 'shared/models/IHistory';
 import { Control, Controller, FieldValues } from 'react-hook-form';
+import { IResult } from 'shared/models/IResult';
 
 interface Props {
-  result: IHistory[];
+  result: IResult[];
   control: Control<FieldValues, any>;
 }
 

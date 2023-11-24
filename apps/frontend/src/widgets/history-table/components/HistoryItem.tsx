@@ -1,12 +1,12 @@
 import { Flex } from '@mantine/core';
 import { Checkbox } from 'shared/components/Checkbox';
 import { Tag } from 'shared/components/Tag';
-import { IHistory } from 'shared/models/IHistory';
+import { IResult } from 'shared/models/IResult';
 import { Tags } from 'widgets/analysis-result/Result/Tags';
 
 interface Props {
   index: number;
-  item: IHistory;
+  item: IResult;
 }
 
 export const HistoryItem = ({ index, item }: Props) => {

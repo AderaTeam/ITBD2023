@@ -41,7 +41,7 @@ const AnalysisPage = () => {
     <AdminWrapper title="Анализ нового обращения">
       <Stack spacing={16}>
         {result.length && AStore.curentStep === 1 ? (
-          <AnalysisResult result={result} />
+          <AnalysisResult getResult={getResult} result={result} />
         ) : (
           <AnalysisForm
             isLoading={isLoading}

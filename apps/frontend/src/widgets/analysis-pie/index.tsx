@@ -13,17 +13,15 @@ export const AnalysisPie = observer(() => {
 
   return (
     <Card w={796} h={443}>
-      {AStore.curentStep === 0 && (
-        <Stack align="center" justify="center" style={{ height: '100%' }}>
-          <Stack spacing={24} align="center">
-            <Image src={pie} />
-            <Text className={style.text}>
-              Здесь будет информация по обращению
-            </Text>
-            <Image src={stat} />
-          </Stack>
+      <Stack align="center" justify="center" style={{ height: '100%' }}>
+        <Stack spacing={24} align="center">
+          <Image src={pie} />
+          <Text className={style.text}>
+            Здесь будет информация по обращению
+          </Text>
+          <Image src={stat} />
         </Stack>
-      )}
+      </Stack>
     </Card>
   );
 });

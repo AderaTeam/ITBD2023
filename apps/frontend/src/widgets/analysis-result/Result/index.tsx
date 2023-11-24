@@ -15,9 +15,10 @@ import { IType } from 'shared/models/ITypes';
 interface Props {
   result: IResult;
   index: number;
+  getResult: Function;
 }
 
-export const Result = ({ result, index }: Props) => {
+export const Result = ({ result, index, getResult }: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const { control, handleSubmit, watch, setValue } = useForm({
     defaultValues: result,
@@ -27,14 +28,18 @@ export const Result = ({ result, index }: Props) => {
     []
   );
   const [data, setData] = useState<IType>();
+  const [departments, setDepartments] = useState<
+    { value: string; label: string }[]
+  >([]);
 
   const onSubmit = handleSubmit((formData) => {
-    console.log(formData);
+    AnalysisServices.upadateAnalysis(formData).then(() => {
+      getResult(result.id);
+    });
   });
 
-  useEffect(() => {
-    AnalysisServices.getEnum().then((response) => {
-      console.log();
+  const getTypesEnum = () => {
+    AnalysisServices.getTypesEnum().then((response) => {
       setData(response.data);
       setGroup(
         Object.keys(response.data).map((item) => {
@@ -43,6 +48,17 @@ export const Result = ({ result, index }: Props) => {
       );
       setCategory(Object.values(response.data).flat());
     });
+  };
+
+  const getDepartamentsEnum = () => {
+    AnalysisServices.getDepartamentsEnum().then((response) => {
+      setDepartments(response.data);
+    });
+  };
+
+  useEffect(() => {
+    getTypesEnum();
+    getDepartamentsEnum();
   }, []);
 
   useEffect(() => {
@@ -73,6 +89,7 @@ export const Result = ({ result, index }: Props) => {
         <Info result={result} />
       ) : (
         <Edit
+          departments={departments}
           control={control}
           category={category}
           group={group}

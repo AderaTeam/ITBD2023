@@ -1,11 +1,11 @@
 import { Stack } from '@mantine/core';
 import { HistoryTableHeader } from './components/HistoryTableHeader';
 import { HistoryList } from './components/HistoryList';
-import { IHistory } from 'shared/models/IHistory';
 import { useForm } from 'react-hook-form';
+import { IResult } from 'shared/models/IResult';
 
 interface Props {
-  result: IHistory[];
+  result: IResult[];
 }
 
 export const HistoryTable = ({ result }: Props) => {

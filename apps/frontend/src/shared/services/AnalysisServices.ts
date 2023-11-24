@@ -14,7 +14,20 @@ export default class AnalysisServices {
     return $api.get<IResult[]>(`/process/${id}`);
   }
 
-  static async getEnum(): Promise<AxiosResponse<IType>> {
+  static async getTypesEnum(): Promise<AxiosResponse<IType>> {
     return $api.get<IType>('/data/themes');
+  }
+
+  static async getDepartamentsEnum(): Promise<
+    AxiosResponse<{ value: string; label: string }[]>
+  > {
+    return $api.get<{ value: string; label: string }[]>('/data/departaments');
+  }
+
+  static async upadateAnalysis({
+    id,
+    ...data
+  }: IResult): Promise<AxiosResponse> {
+    return $api.post(`/process/${id}`, data);
   }
 }

@@ -11,9 +11,16 @@ interface Props {
   control: Control<IResult, any>;
   group: { value: string; label: string }[];
   category: { value: string; label: string }[];
+  departments: { value: string; label: string }[];
 }
 
-export const Edit = ({ result, control, group, category }: Props) => {
+export const Edit = ({
+  result,
+  control,
+  group,
+  category,
+  departments,
+}: Props) => {
   return (
     <Stack spacing={18}>
       <Stack spacing={9}>
@@ -44,7 +51,7 @@ export const Edit = ({ result, control, group, category }: Props) => {
           <Controller
             control={control}
             name="department"
-            render={({ field }) => <Select field={field} data={[]} />}
+            render={({ field }) => <Select field={field} data={departments} />}
           />
         </Stack>
         <Stack w={354} spacing={9}>
