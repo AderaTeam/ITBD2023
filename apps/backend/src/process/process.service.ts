@@ -88,7 +88,7 @@ export class ProcessService {
         record = {
             "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
-            "address": response.data[text].place ?? null,
+            "address": response.data[text].place[0] ?? null,
             "department":response.data[text].executor ?? null,
             "category": response.data[text].theme,
             "group": response.data[text].theme_group,
