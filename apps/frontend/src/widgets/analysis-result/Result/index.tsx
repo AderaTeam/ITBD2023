@@ -64,7 +64,6 @@ export const Result = ({ result, index, getResult }: Props) => {
   useEffect(() => {
     if (data && watch('group')) {
       setValue('category', '');
-      console.log(data[watch('group')]);
       setCategory(data[watch('group')]);
     }
   }, [watch('group')]);

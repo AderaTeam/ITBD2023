@@ -51,6 +51,7 @@ export const HistoryButtonRow = ({ getValues, result }: Props) => {
       <Controller
         name="search"
         control={control}
+        disabled
         render={({ field }) => (
           <Input
             w={430}

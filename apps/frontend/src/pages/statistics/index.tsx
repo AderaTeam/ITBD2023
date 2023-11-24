@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
 import { StatisticsLeft } from 'widgets/statistics-left';
 import { StatisticsRight } from 'widgets/statistics-right';

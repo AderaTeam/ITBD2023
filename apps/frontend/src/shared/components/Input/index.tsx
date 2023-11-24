@@ -13,22 +13,34 @@ interface Props {
   h?: number;
   placeholder?: string;
   br?: string;
+  disabled?: boolean;
 }
 
-export const Input = ({ field, w, h, size, placeholder, br }: Props) => {
+export const Input = ({
+  field,
+  w,
+  h,
+  size,
+  placeholder,
+  br,
+  disabled,
+}: Props) => {
   return (
     <MantineInput
       placeholder={placeholder}
       rightSection={
-        <IconSearch
-          opacity={0.3}
-          style={{ marginBottom: '4px' }}
-          width={24}
-          height={24}
-        />
+        placeholder && (
+          <IconSearch
+            opacity={0.3}
+            style={{ marginBottom: '4px' }}
+            width={24}
+            height={24}
+          />
+        )
       }
       w={w}
       h={h}
+      disabled={disabled}
       style={{ borderRadius: br }}
       size={size}
       {...field}
