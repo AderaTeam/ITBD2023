@@ -1,15 +1,21 @@
 import { Flex, Stack, Text } from '@mantine/core';
 import style from './Result.module.scss';
 import { Tags } from './Tags';
+import { IResult } from 'shared/models/IResult';
 
-export const Info = () => {
+interface Props {
+  result: IResult;
+  index: number;
+}
+
+export const Info = ({ result, index }: Props) => {
   return (
     <Stack spacing={18}>
       <Stack spacing={9}>
-        <Text className={style.subtitle}>Текст обращения</Text>
-        <Text className={style.text}>
-          Как принять участие ?!? 💐💐💐💐💐💐💐💐💐
+        <Text className={style.subtitle}>
+          Текст обращения <span className={style.index}>({index + 1})</span>
         </Text>
+        <Text className={style.text}>{result.text}</Text>
       </Stack>
       <Flex align={'center'} justify={'space-between'}>
         <Stack w={354} spacing={9}>
@@ -18,7 +24,7 @@ export const Info = () => {
             className={style.text}
             style={{ color: '#CC5DE8', opacity: '0.8' }}
           >
-            Оказание гос. соц. помощи
+            {result.category}
           </Text>
         </Stack>
         <Stack w={354} spacing={9}>
@@ -27,7 +33,7 @@ export const Info = () => {
             style={{ color: '#CC5DE8', opacity: '0.8' }}
             className={style.text}
           >
-            Социальное обслуживание и защита
+            {result.group}
           </Text>
         </Stack>
       </Flex>
@@ -35,27 +41,29 @@ export const Info = () => {
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Исполнитель</Text>
           <Text className={style.text}>
-            Министерство социального развития ПК
+            {result.department ? result.department : 'Не выявлен'}
           </Text>
         </Stack>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Дата</Text>
-          <Text className={style.text}>Не выявлена</Text>
+          <Text className={style.text}>
+            {result.date ? result.date : 'Не выявлена'}
+          </Text>
         </Stack>
       </Flex>
       <Flex align={'center'} justify={'space-between'}>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Адрес</Text>
           <Text className={style.text}>
-            Министерство социального развития ПК
+            {result.address ? result.address : 'Не выявлен'}
           </Text>
         </Stack>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Телефон</Text>
-          <Text className={style.text}>Не выявлен</Text>
+          <Text className={style.text}>{'Не выявлен'}</Text>
         </Stack>
       </Flex>
-      <Tags />
+      <Tags tags={result.tags} />
     </Stack>
   );
 };

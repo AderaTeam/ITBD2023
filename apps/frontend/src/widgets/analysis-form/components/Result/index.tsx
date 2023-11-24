@@ -4,8 +4,13 @@ import { IconEdit } from '@tabler/icons-react';
 import style from './Result.module.scss';
 import { Info } from './Info';
 import { useState } from 'react';
+import { IResult } from 'shared/models/IResult';
 
-export const Result = () => {
+interface Props {
+  result: IResult[];
+}
+
+export const Result = ({ result }: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   return (
@@ -21,7 +26,15 @@ export const Result = () => {
           stroke={2}
         />
       </Flex>
-      {!isEdit ? <Info /> : <></>}
+      {!isEdit ? (
+        <Stack spacing={16}>
+          {result.map((item, index) => (
+            <Info key={item.id} index={index} result={item} />
+          ))}
+        </Stack>
+      ) : (
+        <></>
+      )}
     </Stack>
   );
 };
