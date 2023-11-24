@@ -14,9 +14,14 @@ export class ProcessService {
         private tagRepository: Repository<Tag>,
     ){}
 
+    public async editData0(object: ResultDto, id: number)
+    {
+        //return this.resultRepository.update()
+    }
+
     public async getHistory()
     {
-        return this.resultRepository.find({order:{dateMaking:'DESC'}})
+        return this.resultRepository.find({order:{dateMaking:'DESC'}, relations:{tags: true}})
     }
 
     public async processText(text: string)
