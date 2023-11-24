@@ -3,7 +3,7 @@ import { ResultDto } from './dtos/result.dto';
 import { In, Repository } from 'typeorm';
 import { Result } from './entities/result.entity';
 import { Tag } from './entities/tag.entity';
-
+import axios from "axios"
 @Injectable()
 export class ProcessService {
 
@@ -70,33 +70,35 @@ export class ProcessService {
 
     public async processText(text: string)
     {
-        const record = {
-            "date": null,
-            "text": text,
-            "address": "2-я Болдовская 8/2",
-            "department": "ИГЖН ПК",
-            "category": "Засор в общедомовой системе водоотведения (канализации)",
-            "group": "ЖКХ",
-            "tags": [
-                {
-                    "id": 1,
-                    "name": "трубы"
-                },
-                {
-                    "id": 2,
-                    "name": "прорвало"
-                },
-                {
-                    "id": 3,
-                    "name": "подвал"
-                },
-                {
-                    "id": 4,
-                    "name": "пятиэтажка"
-                }
-            ]
-    }
+        const date = new Date();
+
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        let minutes = date.getMinutes()
+        let hours = date.getHours()
+
+        let record = {}
+        axios.post('http://178.170.192.87:8003/items', {
+            items: [text]
+          })
+          .then(function (response) {
+            record = {
+                "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
+                "text": text,
+                "address": response.data.place ?? null,
+                "department":response.data.executor ?? null,
+                "category": response.data.theme,
+                "group": response.data.theme_group,
+                "tags": response.data.problem ?? null
+        }
         return this.saveRecord(record)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
     }
 
     public async saveRecord(record: ResultDto)
