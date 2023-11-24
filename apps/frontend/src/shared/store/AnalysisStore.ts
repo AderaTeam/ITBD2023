@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 export default class AnalysisStore {
-  curentStep = 0;
+  curentStep = 1;
   isLoading = false;
 
   constructor() {
