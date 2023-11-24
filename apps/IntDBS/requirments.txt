@@ -6,4 +6,9 @@ scipy
 spacy
 transformers
 torch==1.13.1+cu116
-torchdata==0.5.1
+gunicorn
+uvicorn
+fastapi
+python-dotenv
+python-multipart
+sentence_transformers

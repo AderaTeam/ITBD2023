@@ -72,11 +72,14 @@ async def create_item(item: Data):
         # print(5)
         prob_c = [k.text for k in nlp_prob(s).ents]
         # print(6)
-        exe = exe_nums[torch.argmax(model_exe(v.to('cuda').double())[0]).item()]
-        theme = theme_nums[torch.argmax(model_theme(v.to('cuda').double())[0]).item()]
+        exe = exe_nums[torch.argmax(model_exe(v.to('cpu').double())[0]).item()]
+        theme_group = theme_group_nums[torch.argmax(model_theme_group(v.to('cpu').double())[0]).item()]
+        theme = themes_num[str(torch.argmax(model_theme(v.to('cpu').double())[0]).item())]
         res['data'][i] = {
                 'place': place if place else place_c if place_c else [],
                 'problem': prob if prob else prob_c if prob_c else [],
                 'executor': exe,
-                'theme_group': theme}
+                'theme_group': theme_group,
+                'theme': theme
+            }
     return res
