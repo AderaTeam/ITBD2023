@@ -84,7 +84,7 @@ export class ProcessService {
             data: [text]
         })
 
-        Logger.log(response)
+        //Logger.log(response)
         record = {
             "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
