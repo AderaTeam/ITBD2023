@@ -13,7 +13,7 @@ export const HistoryItem = ({ index, item }: Props) => {
   return (
     <Flex gap={8}>
       <Tag color="#1A1B1E" text="1" p="16px" w="64px" h="68px" center>
-        <Checkbox />
+        <Checkbox value={`${item.id}`} />
       </Tag>
       <Tag
         color="#1A1B1E"

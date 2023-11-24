@@ -20,7 +20,9 @@ const AnalysisPage = () => {
   const getResult = (id: number) => {
     AnalysisServices.getAnalysisResult(id)
       .then((response) => {
-        AStore.setCurentStep(1);
+        AStore.curentStep === 1
+          ? AStore.setCurentStep(2)
+          : AStore.setCurentStep(1);
         setResult(response.data);
       })
       .finally(() => setIsLoading(false));
@@ -40,7 +42,7 @@ const AnalysisPage = () => {
   return (
     <AdminWrapper title="Анализ нового обращения">
       <Stack spacing={16}>
-        {result.length && AStore.curentStep === 1 ? (
+        {result.length && AStore.curentStep >= 1 ? (
           <AnalysisResult getResult={getResult} result={result} />
         ) : (
           <AnalysisForm
@@ -50,7 +52,7 @@ const AnalysisPage = () => {
             onSubmit={onSubmit}
           />
         )}
-        <AnalysisBar />
+        <AnalysisBar length={result.length} />
       </Stack>
       <Stack spacing={10}>
         <AnalysisGuide />

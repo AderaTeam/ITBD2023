@@ -34,10 +34,17 @@
   background: #25262b;
   border-radius: 12px;
   border-color: #2c2e33;
-}
-
-.mantine-Select-item {
-  &:hover {
-    color: #25262b;
+  width: 343px;
+  &[data-hovered] {
+    background: #1a1b1e;
+  }
+  &[data-selected] {
+    background: #cc5de8;
+    &[data-hovered] {
+      background: #cc5de8;
+    }
+    &:hover {
+      background: #cc5de8;
+    }
   }
 }
