@@ -23,6 +23,13 @@ export class Result {
 
     @Column(
         {
+            nullable: false,
+        }
+    )
+    dateMaking: string
+
+    @Column(
+        {
             nullable: true,
         }
     )

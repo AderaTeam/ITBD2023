@@ -21,8 +21,8 @@ export class ProcessService {
             "text": text,
             "address": "2-я Болдовская 8/2",
             "department": "Водоканал",
-            "category": "Прорвало трубы",
-            "group": "HZ",
+            "category": "Засор в общедомовой системе водоотведения (канализации)",
+            "group": "ЖКХ",
             "tags": [
                 "трубы",
                 "прорвало",
@@ -35,6 +35,8 @@ export class ProcessService {
 
     public async saveRecord(record: ResultDto)
     {
+        record.dateMaking = new Date().toString()
+        Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
         for (const tag of record.tags)
         {
