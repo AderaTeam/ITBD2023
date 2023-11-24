@@ -2,6 +2,11 @@
 
 Обученные модели: https://drive.google.com/drive/folders/16KhtZbdi2Z1DuxIwXHhGSUTxMcTd2dkv?usp=sharing
 
+## Инициализация среды
+Для загрузки библиотек нужно выполнить команду:
+
+```pip install -r .\requirments.txt -f https://download.pytorch.org/whl/torch_stable.html```
+
 ## Анализ входных данных
 **Происходит в файле prewatch_data.ipynb**
 **И ещё немного в файлах ModelOnPreClean.ipynb, ModelOnExe.ipynb, train_model_on_vec_seq.ipynb**
