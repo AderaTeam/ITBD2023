@@ -80,11 +80,11 @@ export class ProcessService {
         let hours = date.getHours()
 
         let record = {}
-        const response = await axios.post('http://178.170.192.87:8003/items', {
+        let response = await axios.post('http://178.170.192.87:8003/items', {
             data: [text]
         })
 
-        Logger.log(response.data)
+        response = response.data
         record = {
             "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
