@@ -17,7 +17,16 @@ export class ProcessService {
     public async editRecord(id: number, object: ResultDto,)
     {
         let currentRecord = await this.resultRepository.findOne({where:{id:id}})
+        const date = new Date();
 
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        let minutes = date.getMinutes()
+        let hours = date.getHours()
+
+        object.dateMaking = `${day}.${month}.${year} ${hours}:${minutes}`;
         let rightTags = []
         for (const tag of object.tags)
         {
