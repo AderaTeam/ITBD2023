@@ -15,14 +15,14 @@ export class ProcessController {
 
     @Post('file')
     @UseInterceptors(FileInterceptor('file'))
-    uploadFile(@UploadedFile() file: Express.Multer.File)
+    public async uploadFile(@UploadedFile() file: Express.Multer.File)
     {
         var table = xlsx.parse(file.buffer)
         Logger.log(table)
         let response = []
         for (const text of table[0].data)
         {
-            response.push(this.processService.processText(text[0]))
+            response.push(await this.processService.processText(text[0]))
         }
         return response
     }
