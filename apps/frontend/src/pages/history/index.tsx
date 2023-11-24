@@ -1,4 +1,4 @@
-import { Stack } from '@mantine/core';
+import { Flex, Loader, Stack } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
@@ -17,9 +17,15 @@ const HistoryPage = () => {
 
   return (
     <AdminWrapper fullWidth>
-      <Stack spacing={16}>
+      <Stack spacing={16} w={1607}>
         <HistoryButtonRow result={result} getValues={getValues} />
-        <HistoryTable control={control} setValue={setValue} result={result} />
+        {result.length ? (
+          <HistoryTable control={control} setValue={setValue} result={result} />
+        ) : (
+          <Flex justify={'center'} mt={300} align={'center'}>
+            <Loader size={'xl'} color="grape.5" />
+          </Flex>
+        )}
       </Stack>
       <></>
     </AdminWrapper>

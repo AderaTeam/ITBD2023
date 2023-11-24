@@ -16,10 +16,10 @@
 
 .hover-tag {
   @extend .tag;
-  transition: all 0.3s;
   &:hover {
     color: #abe85d !important;
     border: 1px solid #abe85d;
-    background: #1a1b1e;
+    background: #1a1b1e !important;
+    padding: 15px !important;
   }
 }

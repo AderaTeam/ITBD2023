@@ -34,7 +34,7 @@ export const Result = ({ result, index, getResult }: Props) => {
 
   const onSubmit = handleSubmit((formData) => {
     AnalysisServices.upadateAnalysis(formData).then(() => {
-      getResult(result.id);
+      getResult(result.id, true);
     });
   });
 

@@ -87,8 +87,8 @@ const MapPage = () => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: '100%',
-                height: '100%',
+                width: '1139px',
+                height: '80vh',
               }}
             >
               <Loader size={'xl'} color="grape.5" />

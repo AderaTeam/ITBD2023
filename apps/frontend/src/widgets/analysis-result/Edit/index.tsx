@@ -56,9 +56,11 @@ export const Edit = ({
         </Stack>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Дата</Text>
-          <Text className={style.text}>
-            {result.date ? result.date : 'Не выявлена'}
-          </Text>
+          <Controller
+            name="date"
+            control={control}
+            render={({ field }) => <Input field={field} />}
+          />
         </Stack>
       </Flex>
       <Flex align={'flex-start'} justify={'space-between'}>

@@ -22,11 +22,7 @@ const AnalysisPage = () => {
   const getResult = (id: number, step?: number) => {
     AnalysisServices.getAnalysisResult(id)
       .then((response) => {
-        AStore.curentStep === 1
-          ? AStore.setCurentStep(2)
-          : step
-          ? AStore.setCurentStep(2)
-          : AStore.setCurentStep(1);
+        step ? AStore.setCurentStep(2) : AStore.setCurentStep(1);
         setResult(response.data);
       })
       .finally(() => setIsLoading(false));
