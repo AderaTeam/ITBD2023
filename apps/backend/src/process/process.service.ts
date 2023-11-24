@@ -83,16 +83,16 @@ export class ProcessService {
         const response = await axios.post('http://178.170.192.87:8003/items', {
             data: [text]
         })
-        
+
         Logger.log(response)
         record = {
             "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
-            "address": response.data.place ?? null,
-            "department":response.data.executor ?? null,
-            "category": response.data.theme,
-            "group": response.data.theme_group,
-            "tags": response.data.problem ?? null
+            "address": response.data[text].place ?? null,
+            "department":response.data[text].executor ?? null,
+            "category": response.data[text].theme,
+            "group": response.data[text].theme_group,
+            "tags": response.data[text].problem ?? null
             }
         return this.saveRecord(record)
 
