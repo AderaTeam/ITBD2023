@@ -60,6 +60,6 @@ export class ProcessService {
 
     public async getRecord(id: number)
     {
-        return await this.resultRepository.findOne({where:{id: id}, relations: {tags: true}})
+        return [await this.resultRepository.findOne({where:{id: id}, relations: {tags: true}})]
     }
 }
