@@ -18,7 +18,10 @@ export const Result = ({ result, index }: Props) => {
   return (
     <Stack spacing={32}>
       <Flex align={'center'} justify={'space-between'}>
-        <Text className={style.title}>Результат анализа обращения</Text>
+        <Text className={style.title}>
+          Результат анализа обращения{' '}
+          <span className={style.index}>({index + 1})</span>
+        </Text>
         <IconEdit
           onClick={() => setIsEdit(!isEdit)}
           style={{ cursor: 'pointer' }}
@@ -28,7 +31,7 @@ export const Result = ({ result, index }: Props) => {
           stroke={2}
         />
       </Flex>
-      {!isEdit ? <Info index={index} result={result} /> : <Edit />}
+      {!isEdit ? <Info result={result} /> : <Edit result={result} />}
     </Stack>
   );
 };

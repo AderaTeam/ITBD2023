@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import AnalysisServices from 'shared/services/AnalysisServices';
 
 export default class AnalysisStore {
-  curentStep = 0;
+  curentStep = 1;
   isLoading = false;
 
   constructor() {

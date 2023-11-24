@@ -14,14 +14,14 @@ const AdminWrapper = ({ children, CustomTitle, title, fullWidth }: Props) => {
   const location = useLocation();
 
   return (
-    <Stack bg={'dark.9'} p={'40px'} spacing={32}>
+    <Stack bg={'dark.9'} p={'40px 32px'} spacing={32}>
       {CustomTitle ? <CustomTitle /> : <TitleWrapper title={title} />}
       {location.pathname === '/analysis' && <AnalysisSteps />}
       <Flex justify="space-between" gap={16}>
         {!fullWidth ? (
           <>
             <Stack w={796}>{children ? children[0] : <></>}</Stack>
-            <Stack w={796}>{children ? children[1] : <></>}</Stack>
+            <Stack w={795}>{children ? children[1] : <></>}</Stack>
           </>
         ) : (
           <Stack spacing={0}>{children ? children[0] : <></>}</Stack>

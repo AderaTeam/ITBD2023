@@ -29,13 +29,13 @@ export const AnalysisSteps = observer(() => {
             <Flex key={block.title} align={'center'} gap={24}>
               <Divider
                 color={AStore.curentStep > 0 ? 'grape.5' : 'dark.6'}
-                w={387}
+                w={386}
                 h={1}
               />
               <StepCard index={index} block={block} step={AStore.curentStep} />
               <Divider
                 color={AStore.curentStep > 1 ? 'grape.5' : 'dark.6'}
-                w={387}
+                w={386}
                 h={1}
               />
             </Flex>

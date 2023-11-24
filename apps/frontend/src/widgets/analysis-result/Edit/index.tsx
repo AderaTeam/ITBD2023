@@ -1,5 +1,10 @@
+import { IResult } from 'shared/models/IResult';
 import style from './Edir.module.scss';
 
-export const Edit = () => {
+interface Props {
+  result: IResult;
+}
+
+export const Edit = ({ result }: Props) => {
   return <>123</>;
 };

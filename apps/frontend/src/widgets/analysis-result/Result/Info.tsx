@@ -5,19 +5,16 @@ import { IResult } from 'shared/models/IResult';
 
 interface Props {
   result: IResult;
-  index: number;
 }
 
-export const Info = ({ result, index }: Props) => {
+export const Info = ({ result }: Props) => {
   return (
     <Stack spacing={18}>
       <Stack spacing={9}>
-        <Text className={style.subtitle}>
-          Текст обращения <span className={style.index}>({index + 1})</span>
-        </Text>
+        <Text className={style.subtitle}>Текст обращения</Text>
         <Text className={style.text}>{result.text}</Text>
       </Stack>
-      <Flex align={'center'} justify={'space-between'}>
+      <Flex align={'flex-start'} justify={'space-between'}>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Тема</Text>
           <Text
@@ -37,7 +34,7 @@ export const Info = ({ result, index }: Props) => {
           </Text>
         </Stack>
       </Flex>
-      <Flex align={'center'} justify={'space-between'}>
+      <Flex align={'flex-start'} justify={'space-between'}>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Исполнитель</Text>
           <Text className={style.text}>
@@ -51,7 +48,7 @@ export const Info = ({ result, index }: Props) => {
           </Text>
         </Stack>
       </Flex>
-      <Flex align={'center'} justify={'space-between'}>
+      <Flex align={'flex-start'} justify={'space-between'}>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Адрес</Text>
           <Text className={style.text}>
