@@ -65,9 +65,9 @@ export class ProcessService {
             "date": null,
             "text": text,
             "address": "2-я Болдовская 8/2",
-            "department": "Водоканал",
+            "department": "ИГЖН ПК",
             "category": "Засор в общедомовой системе водоотведения (канализации)",
-            "group": "ИГЖН ПК",
+            "group": "ЖКХ",
             "tags": [
                 {
                     "id": 1,
