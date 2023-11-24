@@ -1,17 +1,15 @@
+import { Stack } from '@mantine/core';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
+import { HistoryButtonRow } from 'widgets/history-button-row';
+import { HistoryTable } from 'widgets/history-table';
 
 const HistoryPage = () => {
   return (
     <AdminWrapper fullWidth>
-      <>
-        123 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione,
-        dignissimos libero. Autem numquam deleniti porro, placeat maiores vero
-        rem reprehenderit dolor ipsam adipisci mollitia minus repellendus
-        necessitatibus, distinctio animi asperiores! Lorem ipsum dolor sit, amet
-        consectetur adipisicing elit. Et numquam fugit aut harum provident sequi
-        exercitationem itaque, eum possimus animi optio voluptatibus laborum
-        odit soluta, quae est quam, veniam recusandae.
-      </>
+      <Stack spacing={16}>
+        <HistoryButtonRow />
+        <HistoryTable />
+      </Stack>
       <></>
     </AdminWrapper>
   );

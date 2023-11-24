@@ -25,7 +25,7 @@ export const Button = ({
       style={
         outline
           ? {
-              background: '#1A1B1E',
+              background: 'transparent',
               border: '2px solid #25262B',
             }
           : { background: color }
