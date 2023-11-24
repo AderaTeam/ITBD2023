@@ -2,13 +2,15 @@ import { Stack, Flex, Text } from '@mantine/core';
 import { IconEdit } from '@tabler/icons-react';
 import { Edit } from '../Edit';
 import { Info } from './Info';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IResult } from 'shared/models/IResult';
 
 import style from './Result.module.scss';
 import { Tags } from './Tags';
 import { Button } from 'shared/components/Buttons';
 import { useForm } from 'react-hook-form';
+import AnalysisServices from 'shared/services/AnalysisServices';
+import { IType } from 'shared/models/ITypes';
 
 interface Props {
   result: IResult;
@@ -17,11 +19,39 @@ interface Props {
 
 export const Result = ({ result, index }: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const { control, handleSubmit } = useForm({ defaultValues: result });
+  const { control, handleSubmit, watch, setValue } = useForm({
+    defaultValues: result,
+  });
+  const [group, setGroup] = useState<{ value: string; label: string }[]>([]);
+  const [category, setCategory] = useState<{ value: string; label: string }[]>(
+    []
+  );
+  const [data, setData] = useState<IType>();
 
   const onSubmit = handleSubmit((formData) => {
     console.log(formData);
   });
+
+  useEffect(() => {
+    AnalysisServices.getEnum().then((response) => {
+      console.log();
+      setData(response.data);
+      setGroup(
+        Object.keys(response.data).map((item) => {
+          return { value: item, label: item };
+        })
+      );
+      setCategory(Object.values(response.data).flat());
+    });
+  }, []);
+
+  useEffect(() => {
+    if (data && watch('group')) {
+      setValue('category', '');
+      console.log(data[watch('group')]);
+      setCategory(data[watch('group')]);
+    }
+  }, [watch('group')]);
 
   return (
     <Stack spacing={32}>
@@ -42,7 +72,12 @@ export const Result = ({ result, index }: Props) => {
       {!isEdit ? (
         <Info result={result} />
       ) : (
-        <Edit control={control} result={result} />
+        <Edit
+          control={control}
+          category={category}
+          group={group}
+          result={result}
+        />
       )}
 
       <Tags tags={result?.tags} />

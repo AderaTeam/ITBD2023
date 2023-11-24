@@ -2,11 +2,15 @@ import { Flex } from '@mantine/core';
 import { Checkbox } from 'shared/components/Checkbox';
 import { Tag } from 'shared/components/Tag';
 
-export const HistoryTableHeader = () => {
+interface Props {
+  handleAllSelect: Function;
+}
+
+export const HistoryTableHeader = ({ handleAllSelect }: Props) => {
   return (
     <Flex gap={8}>
       <Tag text="1" p="16px" w="64px" h="64px" center>
-        <Checkbox />
+        <Checkbox onChange={() => handleAllSelect()} />
       </Tag>
       <Tag text="№" p="16px" w="64px" h="64px" center />
       <Tag text="Адрес" p="16px" h="64px" w="419px" />

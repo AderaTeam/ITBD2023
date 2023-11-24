@@ -8,6 +8,7 @@ import { HistoryTable } from 'widgets/history-table';
 const HistoryPage = () => {
   const [result, setResult] = useState<IHistory[]>([
     {
+      id: 0,
       address: 'Омск, ул. Химиков 6/2',
       tags: [
         { id: 0, name: 'test' },
@@ -17,6 +18,7 @@ const HistoryPage = () => {
       department: 'Министерство социального развития ПК',
     },
     {
+      id: 1,
       address: 'Омск, ул. Химиков 6/2',
       tags: [
         { id: 0, name: 'test' },

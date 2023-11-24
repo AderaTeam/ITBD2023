@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import $api from 'shared/api';
 import { IResult } from 'shared/models/IResult';
+import { IType } from 'shared/models/ITypes';
 
 export default class AnalysisServices {
   static async setAnalysis(text?: string): Promise<AxiosResponse<number>> {
@@ -11,5 +12,9 @@ export default class AnalysisServices {
     id: number
   ): Promise<AxiosResponse<IResult[]>> {
     return $api.get<IResult[]>(`/process/${id}`);
+  }
+
+  static async getEnum(): Promise<AxiosResponse<IType>> {
+    return $api.get<IType>('/data/themes');
   }
 }
