@@ -8,7 +8,7 @@ export class ProcessController {
         private readonly processService: ProcessService
     ){}
 
-    @Post('process-text')
+    @Post('')
     public async processText(@Body() data: ResultDto)
     {
         const text = data.text
