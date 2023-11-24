@@ -2,7 +2,7 @@ import { ActionIcon, Flex, Stack, Title } from "@mantine/core";
 import { useLocation, useNavigate } from "react-router-dom";
 import { authRoutes } from "shared/constants/routes";
 import { IconChevronLeft } from '@tabler/icons-react';
-import TitleWrapper from "./TitleWrapper";
+import TitleWrapper from "../TitleWrapper";
 import style from './UserWrapper.module.scss';
 
 type Props = {

@@ -3,22 +3,28 @@ import { Context } from "main";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ANALYSIS_ROUTE, STATISTICS_ROUTE } from "shared/constants/const";
 import { authRoutes, publicRoutes } from "shared/constants/routes";
-import NavbarNested from "widgets/Navbar/Navbar";
+import NavbarNested from "widgets/navbar/Navbar";
 
 export const Routing = observer(() => {
   const { UStore } = useContext(Context);
 
-  if (!UStore.isAuth && location.pathname === '/') {
+  if (!UStore.isAuth && (location.pathname === '/' || location.pathname === ANALYSIS_ROUTE || 
+  location.pathname === STATISTICS_ROUTE)) {
     return <Navigate to='/login' replace/>
   }
 
   if (UStore.isAuth && (location.pathname === '/login' || location.pathname === '/registration')) {
-    return <Navigate to='/' replace/>
+    return <Navigate to={STATISTICS_ROUTE} replace/>
+  }
+
+  if (location.pathname === '/') {
+    return <Navigate to={ANALYSIS_ROUTE}/>
   }
 
   return (
-    <Flex className="wrapper" bg={'gray.0'} style={{height: '100vh'}}>
+    <Flex className="wrapper" bg={'dark.9'} style={{height: '100vh'}}>
       <Flex>
         {(UStore.isAuth && (location.pathname !== '/login' && location.pathname !== '/registration')) 
         ? <NavbarNested/> : <></>}

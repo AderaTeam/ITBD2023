@@ -1,6 +1,12 @@
-export const StatisticsPage = () => {
+import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
 
+const StatisticsPage = () => {
   return (
-    <>stat</>
+    <AdminWrapper title="Статистика обращений">
+      <></>
+      <></>
+    </AdminWrapper>
   );
-}
+};
+
+export default StatisticsPage;
