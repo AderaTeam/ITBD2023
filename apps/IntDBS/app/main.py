@@ -82,4 +82,4 @@ async def create_item(item: Data):
                 'theme_group': theme_group,
                 'theme': theme
             }
-    return {'result': res}
+    return res
