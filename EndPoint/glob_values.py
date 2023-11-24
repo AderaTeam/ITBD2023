@@ -153,18 +153,21 @@ model_exe = model_GRU = RecGRUExample(
     output_size_of_input_layer=50,
     output_layer_size=10,
     alpha=0.07
-).double().to('cuda')
+).double().to('cpu')
 model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe22222.pt'), strict=False)
 model_exe.eval()
+model_exe.h1 = model_exe.h1.to('cpu')
+
 model_theme_group = model_GRU = RecGRUExample(
     size_of_sample=384,
     num_of_samples=128,
     output_size_of_input_layer=50,
     output_layer_size=10,
     alpha=0.07
-).double().to('cuda')
+).double().to('cpu')
 model_theme_group.load_state_dict(torch.load('./Models/my_model_gru_group_theme22222.pt'), strict=False)
 model_theme_group.eval()
+model_theme_group.h1 = model_theme_group.h1.to('cpu')
 
 model_theme = model_GRU = RecGRUExample(
     size_of_sample=384,
@@ -172,6 +175,7 @@ model_theme = model_GRU = RecGRUExample(
     output_size_of_input_layer=50,
     output_layer_size=195,
     alpha=0.07
-).double().to('cuda')
+).double().to('cpu')
+model_theme.h1 = model_theme.h1.to('cpu')
 # model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe.bin'))
 # model_exe.eval()
