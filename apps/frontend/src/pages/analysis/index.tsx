@@ -14,26 +14,7 @@ import { AnalysisResult } from 'widgets/analysis-result';
 const AnalysisPage = () => {
   const { AStore } = useContext(Context);
   const { control, watch, handleSubmit } = useForm();
-  const [result, setResult] = useState<IResult[]>([
-    {
-      id: 2,
-      text: 'Добрый день! А врача на дом можно будет вызвать?',
-      address: 'Магистральная 50',
-      group: 'Здравоохранение/Медицина',
-      category: 'Технические проблемы с записью на прием к врачу',
-      department: 'Министерство здравоохранения',
-      tags: ['врача', 'вызвать'],
-    },
-    {
-      id: 3,
-      text: 'А второй люк остался открытым, и там не видно дна, т. е. Глубины большой.',
-      address: 'Ленина 20',
-      group: 'Благоустройство',
-      category: 'Открытые канализационные люки',
-      department: 'Губахинский городской округ',
-      tags: ['люк', 'открытым'],
-    },
-  ]);
+  const [result, setResult] = useState<IResult[]>([]);
 
   const getResult = (id: number) => {
     AnalysisServices.getAnalysisResult(id).then((response) => {
