@@ -1,6 +1,6 @@
 # Обработка обращений граждан
 
-https://drive.google.com/drive/folders/16KhtZbdi2Z1DuxIwXHhGSUTxMcTd2dkv?usp=sharing
+Обученные модели: https://drive.google.com/drive/folders/16KhtZbdi2Z1DuxIwXHhGSUTxMcTd2dkv?usp=sharing
 
 ## Анализ входных данных
 **Происходит в файле prewatch_data.ipynb**
