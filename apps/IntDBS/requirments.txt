@@ -1,0 +1,9 @@
+pandas
+matplotlib
+seaborn
+numpy
+scipy
+spacy
+transformers
+torch==1.13.1+cu116
+torchdata==0.5.1

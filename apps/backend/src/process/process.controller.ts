@@ -20,6 +20,7 @@ export class ProcessController {
     {
         return this.processService.saveRecord(data)
     }
+    
     @Post(':id')
     public async editRecord(@Param('id') id: number, @Body() data: ResultDto)
     {
