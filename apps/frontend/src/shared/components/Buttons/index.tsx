@@ -20,6 +20,7 @@ export const Button = ({
     <MantineButton
       disabled={disabled}
       color={color}
+      style={{ background: color }}
       onClick={onClick}
       p={'16px 24px'}
       className={style.button}

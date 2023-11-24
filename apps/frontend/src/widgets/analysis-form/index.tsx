@@ -1,8 +1,5 @@
-import { Stack, Text } from '@mantine/core';
+import { Stack } from '@mantine/core';
 import { Card } from 'shared/components/Card';
-import { Button } from 'shared/components/Buttons';
-import { TextArea } from 'shared/components/TextArea';
-import { Controller, useForm } from 'react-hook-form';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 import { Context } from 'main';
