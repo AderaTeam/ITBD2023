@@ -135,7 +135,7 @@ class RecGRUExample(torch.nn.Module):
         )
 
         self.input_activation = torch.nn.Tanh()
-        self.h1 = torch.zeros(self.num_layers_of_input_layer, self.num_of_samples, self.output_size_of_input_layer).double().to('cuda')
+        self.h1 = torch.zeros(self.num_layers_of_input_layer, self.num_of_samples, self.output_size_of_input_layer).double().to('cpu')
 
     def forward(self, x):
         y, h_r = self.input_layer(x, self.h1)
