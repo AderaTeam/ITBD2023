@@ -46,7 +46,7 @@ const useStyles = createStyles((theme) => ({
 
 const NavbarNested = () => {
   const { classes } = useStyles();
-  const { UStore } = useContext(Context);
+  const { UStore, AStore } = useContext(Context);
   const navigate = useNavigate();
 
   return (
@@ -60,7 +60,13 @@ const NavbarNested = () => {
       </Navbar.Section>
 
       <Navbar.Section className={classes.button}>
-        <Button onClick={() => navigate(ANALYSIS_ROUTE)} color="#ABE85D">
+        <Button
+          onClick={() => {
+            AStore.setCurentStep(0);
+            navigate(ANALYSIS_ROUTE);
+          }}
+          color="#ABE85D"
+        >
           <div className={classes['button-text']}>
             <span>Создать</span> <IconPlus />
           </div>

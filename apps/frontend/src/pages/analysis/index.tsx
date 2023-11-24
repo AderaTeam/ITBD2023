@@ -2,6 +2,7 @@ import { Stack } from '@mantine/core';
 import { Context } from 'main';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
 import { IResult } from 'shared/models/IResult';
 import AnalysisServices from 'shared/services/AnalysisServices';
@@ -16,6 +17,7 @@ const AnalysisPage = () => {
   const { control, watch, handleSubmit } = useForm();
   const [result, setResult] = useState<IResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
 
   const getResult = (id: number) => {
     AnalysisServices.getAnalysisResult(id)
@@ -37,6 +39,9 @@ const AnalysisPage = () => {
 
   useEffect(() => {
     AStore.setCurentStep(0);
+    if (id) {
+      getResult(+id);
+    }
   }, []);
 
   return (
