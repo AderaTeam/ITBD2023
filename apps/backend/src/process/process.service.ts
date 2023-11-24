@@ -14,9 +14,44 @@ export class ProcessService {
         private tagRepository: Repository<Tag>,
     ){}
 
-    public async editData0(object: ResultDto, id: number)
+    public async editRecord(id: number, object: ResultDto,)
     {
-        //return this.resultRepository.update()
+        let currentRecord = await this.resultRepository.findOne({where:{id:id}})
+
+        let rightTags = []
+        for (const tag of object.tags)
+        {
+            const name: string = tag.name
+            Logger.log(tag)
+            if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
+            {
+                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+            }
+            else
+            {
+                const currentTag = this.tagRepository.create({name: name.toString()})
+                await this.tagRepository.insert(currentTag)
+                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+            }
+        }
+
+        Logger.log(rightTags)
+
+        for (const prop in object)
+        {
+            if (prop != "tags")
+            {
+                currentRecord[prop] = object[prop]
+            }
+        }
+        if (currentRecord.tags)
+        {
+            currentRecord.tags.forEach(async (tag) => Tag.delete(tag.id))
+            currentRecord.save()
+        }
+        currentRecord.tags = rightTags
+        return currentRecord.save()
+
     }
 
     public async getHistory()
@@ -32,7 +67,7 @@ export class ProcessService {
             "address": "2-я Болдовская 8/2",
             "department": "Водоканал",
             "category": "Засор в общедомовой системе водоотведения (канализации)",
-            "group": "ЖКХ",
+            "group": "ИГЖН ПК",
             "tags": [
                 {
                     "id": 1,

@@ -23,7 +23,7 @@ export class ProcessController {
     @Post(':id')
     public async editRecord(@Body() data: ResultDto)
     {
-        //return this.processService.editRecord(data)
+        return this.processService.editRecord(data.id, data)
     }
 
     @Get('history')

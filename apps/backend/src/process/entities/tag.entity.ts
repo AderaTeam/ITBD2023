@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, JoinColumn, BaseEntity } from "typeorm"
 import { Result } from "./result.entity"
 
 @Entity()
-export class Tag {
+export class Tag extends BaseEntity{
 
     @PrimaryGeneratedColumn()
     id: number
