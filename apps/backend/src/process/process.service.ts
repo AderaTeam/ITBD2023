@@ -65,7 +65,7 @@ export class ProcessService {
 
     public async getHistory()
     {
-        return this.resultRepository.find({order:{dateMaking:'DESC'}, relations:{tags: true}})
+        return this.resultRepository.find({order:{dateMaking:'ASC'}, relations:{tags: true}})
     }
 
     public async processText(text: string)
