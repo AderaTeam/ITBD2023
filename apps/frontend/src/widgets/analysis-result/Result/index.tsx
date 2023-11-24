@@ -1,16 +1,18 @@
-import { Flex, Stack, Text } from '@mantine/core';
+import { Stack, Flex, Text } from '@mantine/core';
 import { IconEdit } from '@tabler/icons-react';
-
-import style from './Result.module.scss';
+import { Edit } from '../Edit';
 import { Info } from './Info';
 import { useState } from 'react';
 import { IResult } from 'shared/models/IResult';
 
+import style from './Result.module.scss';
+
 interface Props {
-  result: IResult[];
+  result: IResult;
+  index: number;
 }
 
-export const Result = ({ result }: Props) => {
+export const Result = ({ result, index }: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   return (
@@ -26,15 +28,7 @@ export const Result = ({ result }: Props) => {
           stroke={2}
         />
       </Flex>
-      {!isEdit ? (
-        <Stack spacing={16}>
-          {result.map((item, index) => (
-            <Info key={item.id} index={index} result={item} />
-          ))}
-        </Stack>
-      ) : (
-        <></>
-      )}
+      {!isEdit ? <Info index={index} result={result} /> : <Edit />}
     </Stack>
   );
 };

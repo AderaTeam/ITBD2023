@@ -1,14 +1,12 @@
-import { Button } from "shared/components/Buttons";
-import AdminWrapper from "shared/components/Wrappers/AdminWrapper";
+import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
 
 const StatisticsPage = () => {
-
   return (
-    <AdminWrapper>
-      <Button onClick={() => console.log('q213')} title="Отправить"/>
+    <AdminWrapper title="Статистика обращений">
+      <></>
       <></>
     </AdminWrapper>
   );
-}
+};
 
 export default StatisticsPage;

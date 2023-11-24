@@ -11,17 +11,19 @@ export const AnalysisBar = observer(() => {
   const { AStore } = useContext(Context);
 
   return (
-    <Card w={796} h={301}>
+    <>
       {AStore.curentStep === 0 && (
-        <Stack align="center" justify="center" style={{ height: '100%' }}>
-          <Stack spacing={24} align="center">
-            <Image src={bar} />
-            <Text className={style.text}>
-              Здесь будет информация по обращению
-            </Text>
+        <Card w={796} h={301}>
+          <Stack align="center" justify="center" style={{ height: '100%' }}>
+            <Stack spacing={24} align="center">
+              <Image src={bar} />
+              <Text className={style.text}>
+                Здесь будет информация по обращению
+              </Text>
+            </Stack>
           </Stack>
-        </Stack>
+        </Card>
       )}
-    </Card>
+    </>
   );
 });

@@ -1,15 +1,43 @@
 import { Stack } from '@mantine/core';
+import { Context } from 'main';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
+import { IResult } from 'shared/models/IResult';
+import AnalysisServices from 'shared/services/AnalysisServices';
 import { AnalysisBar } from 'widgets/analysis-bar';
 import { AnalysisForm } from 'widgets/analysis-form';
 import { AnalysisGuide } from 'widgets/analysis-guide';
 import { AnalysisPie } from 'widgets/analysis-pie';
+import { AnalysisResult } from 'widgets/analysis-result';
 
 const AnalysisPage = () => {
+  const { AStore } = useContext(Context);
+  const { control, watch, handleSubmit } = useForm();
+  const [result, setResult] = useState<IResult[]>([]);
+
+  const getResult = (id: number) => {
+    AnalysisServices.getAnalysisResult(id).then((response) => {
+      AStore.setCurentStep();
+      console.log(response.data);
+      setResult(response.data);
+    });
+  };
+
+  const onSubmit = handleSubmit((formData) => {
+    AStore.setAnalysis(formData.text).then((response) => {
+      getResult(response?.data!);
+    });
+  });
+
   return (
     <AdminWrapper title="Анализ нового обращения">
       <Stack spacing={16}>
-        <AnalysisForm />
+        {result.length && AStore.curentStep === 1 ? (
+          <AnalysisResult result={result} />
+        ) : (
+          <AnalysisForm control={control} watch={watch} onSubmit={onSubmit} />
+        )}
         <AnalysisBar />
       </Stack>
       <Stack spacing={10}>

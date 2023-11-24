@@ -26,7 +26,7 @@ export const AnalysisSteps = observer(() => {
       {blocks.map((block, index) => {
         if (index === 1) {
           return (
-            <Flex align={'center'} gap={24}>
+            <Flex key={block.title} align={'center'} gap={24}>
               <Divider
                 color={AStore.curentStep > 0 ? 'grape.5' : 'dark.6'}
                 w={387}
@@ -42,7 +42,12 @@ export const AnalysisSteps = observer(() => {
           );
         } else {
           return (
-            <StepCard index={index} block={block} step={AStore.curentStep} />
+            <StepCard
+              key={block.title}
+              index={index}
+              block={block}
+              step={AStore.curentStep}
+            />
           );
         }
       })}

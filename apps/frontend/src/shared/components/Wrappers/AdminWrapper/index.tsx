@@ -7,9 +7,10 @@ type Props = {
   children?: React.ReactNode[];
   CustomTitle?: () => JSX.Element;
   title?: string;
+  fullWidth?: boolean;
 };
 
-const AdminWrapper = ({ children, CustomTitle, title }: Props) => {
+const AdminWrapper = ({ children, CustomTitle, title, fullWidth }: Props) => {
   const location = useLocation();
 
   return (
@@ -17,8 +18,14 @@ const AdminWrapper = ({ children, CustomTitle, title }: Props) => {
       {CustomTitle ? <CustomTitle /> : <TitleWrapper title={title} />}
       {location.pathname === '/analysis' && <AnalysisSteps />}
       <Flex justify="space-between" gap={16}>
-        <Stack w={796}>{children ? children[0] : <></>}</Stack>
-        <Stack w={796}>{children ? children[1] : <></>}</Stack>
+        {!fullWidth ? (
+          <>
+            <Stack w={796}>{children ? children[0] : <></>}</Stack>
+            <Stack w={796}>{children ? children[1] : <></>}</Stack>
+          </>
+        ) : (
+          <Stack spacing={0}>{children ? children[0] : <></>}</Stack>
+        )}
       </Flex>
     </Stack>
   );

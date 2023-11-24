@@ -1,5 +1,6 @@
-import { Flex, Stack, Text } from '@mantine/core';
+import { Flex, Image, Stack, Text } from '@mantine/core';
 import { Card } from 'shared/components/Card';
+import star from 'shared/assets/star.png';
 
 import style from './AnalysisGuide.module.scss';
 
@@ -15,7 +16,7 @@ export const AnalysisGuide = () => {
             проблема
           </Text>
         </Stack>
-        <div className={style.box}></div>
+        <Image src={star} />
       </Flex>
     </Card>
   );

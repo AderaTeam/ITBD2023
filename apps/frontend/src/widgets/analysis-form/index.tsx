@@ -1,41 +1,61 @@
-import { Stack } from '@mantine/core';
+import { Stack, Text } from '@mantine/core';
+import {
+  Control,
+  Controller,
+  FieldValues,
+  UseFormWatch,
+} from 'react-hook-form';
+import { MouseEventHandler } from 'react';
+
 import { Card } from 'shared/components/Card';
+import { TextArea } from 'shared/components/TextArea';
+import { FileInput } from 'shared/components/FileInput';
+import { Button } from 'shared/components/Buttons';
+
+import style from './AnalysisForm.module.scss';
 import { observer } from 'mobx-react-lite';
-import { useContext, useState } from 'react';
-import { Context } from 'main';
-import { Form } from './components/Form';
-import { Result } from './components/Result';
-import AnalysisServices from 'shared/services/AnalysisServices';
-import { useForm } from 'react-hook-form';
-import { IResult } from 'shared/models/IResult';
 
-export const AnalysisForm = observer(() => {
-  const { AStore } = useContext(Context);
-  const { control, watch, handleSubmit } = useForm();
-  const [result, setResult] = useState<IResult[]>([]);
+interface Props {
+  control: Control<FieldValues, any>;
+  watch: UseFormWatch<FieldValues>;
+  onSubmit: MouseEventHandler<HTMLButtonElement>;
+}
 
-  const getResult = (id: number) => {
-    AnalysisServices.getAnalysisResult(id).then((response) => {
-      AStore.setCurentStep();
-      console.log(response.data);
-      setResult(response.data);
-    });
-  };
-
-  const onSubmit = handleSubmit((formData) => {
-    AStore.setAnalysis(formData.text).then((response) => {
-      getResult(response?.data!);
-    });
-  });
-
+export const AnalysisForm = observer(({ control, watch, onSubmit }: Props) => {
   return (
     <Stack spacing={32}>
       <Card w={796}>
-        {AStore.curentStep === 0 ? (
-          <Form control={control} watch={watch} onSubmit={onSubmit} />
-        ) : (
-          <Result result={result} />
-        )}
+        <Stack spacing={20}>
+          <Controller
+            name="text"
+            control={control}
+            render={({ field }) => (
+              <TextArea field={field} disabled={watch('file')} />
+            )}
+          />
+          <Text className={style.text} color="dark.5">
+            или...
+          </Text>
+          <Controller
+            name="file"
+            control={control}
+            render={({ field }) => (
+              <FileInput field={field} disabled={watch('text')} />
+            )}
+          />
+          <Button
+            onClick={onSubmit}
+            disabled={!watch('text') && !watch('file')}
+          >
+            {!watch('text') && !watch('file') ? (
+              'Анализировать'
+            ) : (
+              <>
+                Анализировать <span className={style.time}>&nbsp; ~ 1 сек</span>
+              </>
+            )}
+          </Button>
+        </Stack>
       </Card>
     </Stack>
   );
