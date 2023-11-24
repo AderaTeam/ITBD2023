@@ -80,28 +80,23 @@ export class ProcessService {
         let hours = date.getHours()
 
         let record = {}
-        axios.post('http://178.170.192.87:8003/items', {
+        const response = await axios.post('http://178.170.192.87:8003/items', {
             data: [text]
           })
-          .then(function (response) {
-            record = {
-                "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
-                "text": text,
-                "address": response.data.place ?? null,
-                "department":response.data.executor ?? null,
-                "category": response.data.theme,
-                "group": response.data.theme_group,
-                "tags": response.data.problem ?? null
-        }
-        return this.saveRecord(record)
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+          record = {
+            "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
+            "text": text,
+            "address": response.data.place ?? null,
+            "department":response.data.executor ?? null,
+            "category": response.data.theme,
+            "group": response.data.theme_group,
+            "tags": response.data.problem ?? null
+            }
+          return this.saveRecord(record)
 
     }
 
-    public async saveRecord(record: ResultDto)
+    public async saveRecord(record: Record<string, any>)
     {
         const date = new Date();
 
