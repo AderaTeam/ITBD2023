@@ -10,5 +10,5 @@ export class ResultDto
     category: string
     group: string
     department?: string
-    tags?: string[] | Tag[]
+    tags?: any
 }
