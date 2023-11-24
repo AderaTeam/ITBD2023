@@ -26,7 +26,7 @@ export class ProcessService {
         let minutes = date.getMinutes()
         let hours = date.getHours()
 
-        object.dateMaking = `${day}.${month}.${year} ${hours}:${minutes}`;
+        object.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
         let rightTags = []
         for (const tag of object.tags)
         {
@@ -110,7 +110,7 @@ export class ProcessService {
         let minutes = date.getMinutes()
         let hours = date.getHours()
 
-        record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes}`;
+        record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
         Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
         for (const tag of record.tags)
