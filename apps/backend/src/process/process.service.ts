@@ -20,8 +20,7 @@ export class ProcessService {
     {
         const data = [['Полный текст обращения', 'Тема', 'Группа тем', 'Адрес', 'Исполнитель', 'Дата']]
         const results = await this.resultRepository.find({where:{id: In(ids)}})
-        Logger.log(ids)
-        Logger.log(results)
+
         for(const obj of results)
         {
             data.push([obj.text, obj.category, obj.group, obj.address, obj.department, obj.dateMaking])
@@ -48,7 +47,6 @@ export class ProcessService {
         for (const tag of object.tags)
         {
             const name: string = tag.name
-            Logger.log(tag)
             if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
             {
                 rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
@@ -61,7 +59,6 @@ export class ProcessService {
             }
         }
 
-        Logger.log(rightTags)
 
         for (const prop in object)
         {
@@ -134,15 +131,12 @@ export class ProcessService {
         let hours = date.getHours()
 
         record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
-        Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
         if (record.tags != undefined && record.tags.length > 0)
         {
-            Logger.log(record.tags)
             for (const tag of record.tags)
             {
                 const name: string = tag.name
-                Logger.log(tag)
                 if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
                 {
                     rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
@@ -154,7 +148,6 @@ export class ProcessService {
                     rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
                 }
             }
-            Logger.log(rightTags)
         }
         
 
