@@ -18,23 +18,25 @@ const MapPage = () => {
     if (location?.state.result) {
       location?.state.result.map((item: IResult) => {
         try {
-          axios
-            .get(
-              `https://geocode-maps.yandex.ru/1.x/?apikey=5fff5614-b0c5-4970-b75d-28aa88c46171&format=json&geocode=Москва, ${item.address}`
-            )
-            .then((response) => {
-              let stringArray: string[] =
-                response.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
-                  ' '
-                );
-              setMarkers((item) => [
-                ...item!,
-                {
-                  x: +stringArray[1],
-                  y: +stringArray[0],
-                },
-              ]);
-            });
+          if (item.address) {
+            axios
+              .get(
+                `https://geocode-maps.yandex.ru/1.x/?apikey=5fff5614-b0c5-4970-b75d-28aa88c46171&format=json&geocode=Москва, ${item.address}`
+              )
+              .then((response) => {
+                let stringArray: string[] =
+                  response.data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
+                    ' '
+                  );
+                setMarkers((item) => [
+                  ...item!,
+                  {
+                    x: +stringArray[1],
+                    y: +stringArray[0],
+                  },
+                ]);
+              });
+          }
         } catch (error) {
           console.log(error);
         }

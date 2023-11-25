@@ -1,27 +1,30 @@
-import { Text, Stack } from '@mantine/core';
+import { Stack, Text } from '@mantine/core';
 import { Controller, useForm } from 'react-hook-form';
-import { Card } from 'shared/components/Card';
 import { Select } from 'shared/components/Select';
 
 import { theme } from 'shared/constants/theme';
 import { useEffect, useState } from 'react';
 
+import style from './PieDiagram.module.scss';
+
 import {
   Chart as ChartJS,
   Tooltip,
   Legend,
-  BarElement,
   CategoryScale,
   LinearScale,
   Title,
+  LineElement,
+  PointElement,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 ChartJS.defaults.scale.grid.display = false;
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
@@ -57,6 +60,7 @@ export const PieDiagram = ({ keys }: Props) => {
         label: watch('category'),
         data: diagramData?.value,
         backgroundColor: '#CC5DE8',
+        borderColor: '#373A40',
         borderRadius: 16,
       },
     ],
@@ -64,10 +68,11 @@ export const PieDiagram = ({ keys }: Props) => {
 
   return (
     <Stack spacing={24}>
+      <Text className={style.title}>Статистика по данной теме за год</Text>
       <Controller
         control={control}
         name="category"
-        defaultValue={'Диспансеризация'}
+        defaultValue={keys[0]}
         render={({ field }) => (
           <Select
             custom
@@ -78,8 +83,8 @@ export const PieDiagram = ({ keys }: Props) => {
           />
         )}
       />
-      <Stack h={250}>
-        <Bar data={data} />
+      <Stack h={290}>
+        <Line data={data} />
       </Stack>
     </Stack>
   );

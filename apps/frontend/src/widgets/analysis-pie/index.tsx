@@ -1,4 +1,4 @@
-import { Stack, Image, Text } from '@mantine/core';
+import { Stack, Image, Text, Loader } from '@mantine/core';
 import { observer } from 'mobx-react-lite';
 import { Card } from 'shared/components/Card';
 
@@ -19,7 +19,7 @@ export const AnalysisPie = observer(({ result }: Props) => {
   const keys = result.map((item) => item.category);
 
   return (
-    <Card w={796} h={443}>
+    <Card w={796} h={keys.length ? 523 : 443}>
       {AStore.curentStep === 0 ? (
         <Stack align="center" justify="center" style={{ height: '100%' }}>
           <Stack spacing={24} align="center">
@@ -31,7 +31,7 @@ export const AnalysisPie = observer(({ result }: Props) => {
           </Stack>
         </Stack>
       ) : (
-        <PieDiagram keys={keys} />
+        <>{keys.length && <PieDiagram keys={keys} />}</>
       )}
     </Card>
   );

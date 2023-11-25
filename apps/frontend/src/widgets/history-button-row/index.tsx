@@ -1,5 +1,6 @@
 import { Flex } from '@mantine/core';
 import { Button } from 'shared/components/Buttons';
+import FileDownload from 'js-file-download';
 
 import style from './HistoryButtonRow.module.scss';
 import { IconExternalLink } from '@tabler/icons-react';
@@ -13,6 +14,7 @@ import { IResult } from 'shared/models/IResult';
 import { useNavigate } from 'react-router';
 import { MAP_ROUTE } from 'shared/constants/const';
 import { Input } from 'shared/components/Input';
+import HistoryServices from 'shared/services/HistoryServices';
 
 interface Props {
   result: IResult[];
@@ -32,6 +34,11 @@ export const HistoryButtonRow = ({ getValues, result }: Props) => {
     }
   };
 
+  const handleGetFile = async () => {
+    const response = await HistoryServices.getFile(getValues('analysis'));
+    FileDownload(response.data, 'document.xlsx');
+  };
+
   return (
     <Flex align={'flex-start'} justify={'space-between'}>
       <Flex gap={16}>
@@ -43,7 +50,7 @@ export const HistoryButtonRow = ({ getValues, result }: Props) => {
             color="#2C2E33"
           />
         </Button>
-        <Button>
+        <Button onClick={handleGetFile}>
           Экспорт отчета{' '}
           <span className={style['button-text']}>&nbsp; .xlsx</span>
         </Button>
