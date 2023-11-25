@@ -16,6 +16,7 @@ export class ProcessController {
     @UseInterceptors(FileInterceptor('file'))
     public async uploadFile(@UploadedFile() file: Express.Multer.File)
     {
+        Logger.log(file)
         var table = xlsx.parse(file.buffer)
         Logger.log(table)
         let response = []
