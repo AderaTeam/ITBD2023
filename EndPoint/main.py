@@ -74,6 +74,7 @@ async def create_item(item: Data):
         # print(6)
         exe = exe_nums[torch.argmax(model_exe(v.to('cpu').double())[0]).item()]
         theme_group = theme_group_nums[torch.argmax(model_theme_group(v.to('cpu').double())[0]).item()]
+        print(model_theme_group(v.to('cpu').double())[0], '\n\n\n', torch.argmax(model_theme_group(v.to('cpu').double())[0]))
         theme = themes_num[str(torch.argmax(model_theme(v.to('cpu').double())[0]).item())]
         res['data'][i] = {
                 'place': place if place else place_c if place_c else [],
