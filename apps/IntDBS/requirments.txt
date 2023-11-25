@@ -1,0 +1,14 @@
+pandas
+matplotlib
+seaborn
+numpy
+scipy
+spacy
+transformers
+torch==1.13.1+cu116
+gunicorn
+uvicorn
+fastapi
+python-dotenv
+python-multipart
+sentence_transformers

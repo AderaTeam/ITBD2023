@@ -18,7 +18,6 @@ export class UserService {
 
     public async signup(userDto: UserDto)
     {
-        
         const salt = 10
         const hash = await bcrypt.hash(userDto.password, salt)
         if (await this.userRepository.findOne({where:{email: userDto.email}}))
