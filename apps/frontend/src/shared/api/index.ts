@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AuthResponse } from 'shared/models/response/AuthResponse';
 
-export const API_URL = `http://localhost:8000/`;
+export const API_URL = `https://api.adera-team.ru/`;
 
 const $api = axios.create({
   withCredentials: true,

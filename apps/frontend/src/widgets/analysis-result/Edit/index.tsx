@@ -8,9 +8,18 @@ import { Select } from 'shared/components/Select';
 interface Props {
   result: IResult;
   control: Control<IResult, any>;
+  group: { value: string; label: string }[];
+  category: { value: string; label: string }[];
+  departments: { value: string; label: string }[];
 }
 
-export const Edit = ({ result, control }: Props) => {
+export const Edit = ({
+  result,
+  control,
+  group,
+  category,
+  departments,
+}: Props) => {
   return (
     <Stack spacing={18}>
       <Stack spacing={9}>
@@ -23,7 +32,7 @@ export const Edit = ({ result, control }: Props) => {
           <Controller
             control={control}
             name="category"
-            render={({ field }) => <Select field={field} data={[]} />}
+            render={({ field }) => <Select field={field} data={category} />}
           />
         </Stack>
         <Stack w={354} spacing={9}>
@@ -31,7 +40,7 @@ export const Edit = ({ result, control }: Props) => {
           <Controller
             control={control}
             name="group"
-            render={({ field }) => <Select field={field} data={[]} />}
+            render={({ field }) => <Select field={field} data={group} />}
           />
         </Stack>
       </Flex>
@@ -41,14 +50,16 @@ export const Edit = ({ result, control }: Props) => {
           <Controller
             control={control}
             name="department"
-            render={({ field }) => <Select field={field} data={[]} />}
+            render={({ field }) => <Select field={field} data={departments} />}
           />
         </Stack>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Дата</Text>
-          <Text className={style.text}>
-            {result.date ? result.date : 'Не выявлена'}
-          </Text>
+          <Controller
+            name="date"
+            control={control}
+            render={({ field }) => <Input field={field} />}
+          />
         </Stack>
       </Flex>
       <Flex align={'flex-start'} justify={'space-between'}>
@@ -59,10 +70,6 @@ export const Edit = ({ result, control }: Props) => {
             control={control}
             render={({ field }) => <Input field={field} />}
           />
-        </Stack>
-        <Stack w={354} spacing={9}>
-          <Text className={style.subtitle}>Телефон</Text>
-          <Text className={style.text}>{'Не выявлен'}</Text>
         </Stack>
       </Flex>
     </Stack>

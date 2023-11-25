@@ -4,15 +4,15 @@ import { Card } from 'shared/components/Card';
 
 import style from './AnalysisBar.module.scss';
 import bar from 'shared/assets/bar.png';
-import { useContext } from 'react';
-import { Context } from 'main';
 
-export const AnalysisBar = observer(() => {
-  const { AStore } = useContext(Context);
+interface Props {
+  length: number;
+}
 
+export const AnalysisBar = observer(({ length }: Props) => {
   return (
     <>
-      {AStore.curentStep === 0 && (
+      {length <= 1 && (
         <Card w={796} h={301}>
           <Stack align="center" justify="center" style={{ height: '100%' }}>
             <Stack spacing={24} align="center">

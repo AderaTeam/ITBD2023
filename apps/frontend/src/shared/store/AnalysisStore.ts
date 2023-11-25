@@ -13,16 +13,25 @@ export default class AnalysisStore {
     this.isLoading = bool;
   }
 
-  setCurentStep() {
-    if (this.curentStep < 2) {
-      this.curentStep = this.curentStep + 1;
+  setCurentStep(step: number) {
+    this.curentStep = step;
+  }
+
+  async setAnalysisText(text?: string) {
+    this.setLoading(true);
+    try {
+      return await AnalysisServices.setAnalysisText(text);
+    } catch (e: any) {
+      console.log(e.response?.data?.message);
+    } finally {
+      this.setLoading(false);
     }
   }
 
-  async setAnalysis(text?: string) {
+  async setAnalysisFile(file?: FormData) {
     this.setLoading(true);
     try {
-      return await AnalysisServices.setAnalysis(text);
+      return await AnalysisServices.setAnalysisFile(file);
     } catch (e: any) {
       console.log(e.response?.data?.message);
     } finally {

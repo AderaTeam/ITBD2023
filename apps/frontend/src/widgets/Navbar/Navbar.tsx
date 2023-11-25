@@ -2,7 +2,7 @@ import { Navbar, createStyles, Image, Flex } from '@mantine/core';
 import NavbarLinksGroup from './NavbarLinksGroup';
 import { useContext } from 'react';
 import { Context } from '../../main';
-import { IconLogout, IconPlus } from '@tabler/icons-react';
+import { IconPlus } from '@tabler/icons-react';
 import logo from 'shared/assets/logo.svg';
 import { Button } from 'shared/components/Buttons';
 import { useNavigate } from 'react-router';
@@ -46,7 +46,7 @@ const useStyles = createStyles((theme) => ({
 
 const NavbarNested = () => {
   const { classes } = useStyles();
-  const { UStore } = useContext(Context);
+  const { AStore } = useContext(Context);
   const navigate = useNavigate();
 
   return (
@@ -60,7 +60,13 @@ const NavbarNested = () => {
       </Navbar.Section>
 
       <Navbar.Section className={classes.button}>
-        <Button onClick={() => navigate(ANALYSIS_ROUTE)} color="#ABE85D">
+        <Button
+          onClick={() => {
+            AStore.setCurentStep(0);
+            navigate(ANALYSIS_ROUTE);
+          }}
+          color="#ABE85D"
+        >
           <div className={classes['button-text']}>
             <span>Создать</span> <IconPlus />
           </div>
@@ -74,13 +80,6 @@ const NavbarNested = () => {
       <Navbar.Section className={classes.footer}>
         <Flex align={'center'} style={{ color: '#909296' }}>
           Аналитик
-          <IconLogout
-            width={16}
-            stroke={1.5}
-            style={{ marginLeft: '9px', cursor: 'pointer' }}
-            onClick={() => UStore.logout()}
-            color="#2C2E33"
-          />
         </Flex>
       </Navbar.Section>
     </Navbar>

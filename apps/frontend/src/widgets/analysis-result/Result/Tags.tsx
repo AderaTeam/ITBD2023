@@ -2,15 +2,13 @@ import { Flex } from '@mantine/core';
 import { Tag } from 'shared/components/Tag';
 
 interface Props {
-  tags?: string[];
+  tags?: { id: number; name: string }[];
 }
 
 export const Tags = ({ tags }: Props) => {
   return (
     <Flex gap={8} align={'center'}>
-      {tags?.map((item) => (
-        <Tag key={item} text={item} />
-      ))}
+      {tags && tags?.map((item) => <Tag key={item.id} text={item.name} />)}
     </Flex>
   );
 };

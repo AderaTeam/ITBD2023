@@ -11,7 +11,7 @@ export const Info = ({ result }: Props) => {
     <Stack spacing={18}>
       <Stack spacing={9}>
         <Text className={style.subtitle}>Текст обращения</Text>
-        <Text className={style.text}>{result.text}</Text>
+        <Text className={style.text}>{result?.text}</Text>
       </Stack>
       <Flex align={'flex-start'} justify={'space-between'}>
         <Stack w={354} spacing={9}>
@@ -20,7 +20,7 @@ export const Info = ({ result }: Props) => {
             className={style.text}
             style={{ color: '#CC5DE8', opacity: '0.8' }}
           >
-            {result.category}
+            {result?.category}
           </Text>
         </Stack>
         <Stack w={354} spacing={9}>
@@ -29,7 +29,7 @@ export const Info = ({ result }: Props) => {
             style={{ color: '#CC5DE8', opacity: '0.8' }}
             className={style.text}
           >
-            {result.group}
+            {result?.group}
           </Text>
         </Stack>
       </Flex>
@@ -37,13 +37,13 @@ export const Info = ({ result }: Props) => {
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Исполнитель</Text>
           <Text className={style.text}>
-            {result.department ? result.department : 'Не выявлен'}
+            {result?.department ? result.department : 'Не выявлен'}
           </Text>
         </Stack>
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Дата</Text>
           <Text className={style.text}>
-            {result.date ? result.date : 'Не выявлена'}
+            {result?.date ? result.date : 'Не выявлена'}
           </Text>
         </Stack>
       </Flex>
@@ -51,12 +51,8 @@ export const Info = ({ result }: Props) => {
         <Stack w={354} spacing={9}>
           <Text className={style.subtitle}>Адрес</Text>
           <Text className={style.text}>
-            {result.address ? result.address : 'Не выявлен'}
+            {result?.address ? result.address : 'Не выявлен'}
           </Text>
-        </Stack>
-        <Stack w={354} spacing={9}>
-          <Text className={style.subtitle}>Телефон</Text>
-          <Text className={style.text}>{'Не выявлен'}</Text>
         </Stack>
       </Flex>
     </Stack>

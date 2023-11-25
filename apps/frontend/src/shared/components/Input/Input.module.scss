@@ -24,3 +24,13 @@
     }
   }
 }
+
+.custom-input {
+  @extend .input;
+  input {
+    padding: 16px 24px;
+    &:focus-within {
+      border-color: #909296;
+    }
+  }
+}
