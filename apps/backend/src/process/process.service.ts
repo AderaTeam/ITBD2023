@@ -20,6 +20,8 @@ export class ProcessService {
     {
         const data = [['Полный текст обращения', 'Тема', 'Группа тем', 'Адрес', 'Исполнитель', 'Дата']]
         const results = await this.resultRepository.find({where:{id: In(ids)}})
+        Logger.log(ids)
+        Logger.log(results)
         for(const obj of results)
         {
             data.push([obj.text, obj.category, obj.group, obj.address, obj.department, obj.dateMaking])
