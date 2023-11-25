@@ -1,16 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from './user.service';
-import { DataSource } from 'typeorm';
+import { ProcessService } from './process.service';
 
-describe('UserService', () => {
-  let service: UserService;
+describe('ProcessService', () => {
+  let service: ProcessService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UserService],
+      providers: [ProcessService],
     }).compile();
 
-    service = module.get<UserService>(UserService);
+    service = module.get<ProcessService>(ProcessService);
   });
 
   it('should be defined', () => {
