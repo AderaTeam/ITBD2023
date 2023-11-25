@@ -3,6 +3,8 @@ import { ResultDto } from './dtos/result.dto';
 import { In, Repository } from 'typeorm';
 import { Result } from './entities/result.entity';
 import { Tag } from './entities/tag.entity';
+import axios from "axios"
+import * as xlsx from 'node-xlsx'
 
 @Injectable()
 export class ProcessService {
@@ -13,6 +15,19 @@ export class ProcessService {
         @Inject('TAG_REPOSITORY')
         private tagRepository: Repository<Tag>,
     ){}
+
+    public async createTable(ids: number[])
+    {
+        const data = [['Полный текст обращения', 'Тема', 'Группа тем', 'Адрес', 'Исполнитель', 'Дата']]
+        const results = await this.resultRepository.find({where:{id: In(ids)}})
+        for(const obj of results)
+        {
+            data.push([obj.text, obj.category, obj.group, obj.address, obj.department, obj.dateMaking])
+        }
+        var table = xlsx.build([{name: "table", data: data, options:{'!cols': [{wch: 50},{wch: 75},{wch: 50},{wch: 50},{wch: 50},{wch: 50}]}}])
+        
+        return table
+    }
 
     public async editRecord(id: number, object: ResultDto,)
     {
@@ -60,7 +75,6 @@ export class ProcessService {
         }
         currentRecord.tags = rightTags
         return currentRecord.save()
-
     }
 
     public async getHistory()
@@ -70,36 +84,43 @@ export class ProcessService {
 
     public async processText(text: string)
     {
-        const record = {
-            "date": null,
+        const date = new Date();
+
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        let minutes = date.getMinutes()
+        let hours = date.getHours()
+
+        let record = {}
+        let response = await axios.post('http://178.170.192.87:8003/items', {
+            data: [text]
+        })
+
+        response = response.data
+        let tags = []
+        if (response.data[text].problem.length > 0)
+        {
+            for (const tag of response.data[text].problem)
+            {
+                tags.push({name: tag})
+            }
+        }
+        record = {
+            "date": `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`,
             "text": text,
-            "address": "2-я Болдовская 8/2",
-            "department": "ИГЖН ПК",
-            "category": "Засор в общедомовой системе водоотведения (канализации)",
-            "group": "ЖКХ",
-            "tags": [
-                {
-                    "id": 1,
-                    "name": "трубы"
-                },
-                {
-                    "id": 2,
-                    "name": "прорвало"
-                },
-                {
-                    "id": 3,
-                    "name": "подвал"
-                },
-                {
-                    "id": 4,
-                    "name": "пятиэтажка"
-                }
-            ]
-    }
+            "address": response.data[text].place[0] ?? null,
+            "department":response.data[text].executor ?? null,
+            "category": response.data[text].theme,
+            "group": response.data[text].theme_group,
+            "tags": {name: tags ?? null}
+            }
         return this.saveRecord(record)
+
     }
 
-    public async saveRecord(record: ResultDto)
+    public async saveRecord(record: Record<string, any>)
     {
         const date = new Date();
 
@@ -113,22 +134,27 @@ export class ProcessService {
         record.dateMaking = `${day}.${month}.${year} ${hours}:${minutes>9? minutes : '0'+minutes}`;
         Logger.log(record.dateMaking)
         let rightTags:Tag[] = []
-        for (const tag of record.tags)
+        if (record.tags != undefined && record.tags.length > 0)
         {
-            const name: string = tag.name
-            Logger.log(tag)
-            if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
+            Logger.log(record.tags)
+            for (const tag of record.tags)
             {
-                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+                const name: string = tag.name
+                Logger.log(tag)
+                if ((await this.tagRepository.find({where: {name: name.toString()}})).length > 0)
+                {
+                    rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+                }
+                else
+                {
+                    const currentTag = this.tagRepository.create({name: name.toString()})
+                    await this.tagRepository.insert(currentTag)
+                    rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
+                }
             }
-            else
-            {
-                const currentTag = this.tagRepository.create({name: name.toString()})
-                await this.tagRepository.insert(currentTag)
-                rightTags.push((await this.tagRepository.findOne({where: {name: name.toString()}})))
-            }
+            Logger.log(rightTags)
         }
-        Logger.log(rightTags)
+        
 
         const currentRecord = this.resultRepository.create({...record, tags: rightTags})
         const id = (await this.resultRepository.insert(currentRecord)).identifiers[0].id

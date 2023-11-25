@@ -19,6 +19,7 @@ public async getDepartmentsData()
     ]
 }
 
+
 @Get('single')
 public async mockDataSingleReport()
 {
