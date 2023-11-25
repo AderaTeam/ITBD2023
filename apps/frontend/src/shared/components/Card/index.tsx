@@ -1,18 +1,17 @@
-import { Stack } from "@mantine/core";
+import { Stack } from '@mantine/core';
 import style from './Card.module.scss';
 
 interface Props {
   p?: string;
   spasing?: number;
   children?: React.ReactNode;
-  w?: number,
-  h?: number, 
+  w?: number;
+  h?: number | string;
 }
 
-export const Card = ({p = '32px', spasing=16, children, w, h}: Props) => {
-
+export const Card = ({ p = '32px', spasing = 16, children, w, h }: Props) => {
   return (
-    <Stack 
+    <Stack
       p={p}
       spacing={spasing}
       bg={'dark.7'}
@@ -23,4 +22,4 @@ export const Card = ({p = '32px', spasing=16, children, w, h}: Props) => {
       {children}
     </Stack>
   );
-}
+};

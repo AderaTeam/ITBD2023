@@ -54,10 +54,6 @@ export const Info = ({ result }: Props) => {
             {result?.address ? result.address : 'Не выявлен'}
           </Text>
         </Stack>
-        <Stack w={354} spacing={9}>
-          <Text className={style.subtitle}>Телефон</Text>
-          <Text className={style.text}>{'Не выявлен'}</Text>
-        </Stack>
       </Flex>
     </Stack>
   );

@@ -4,7 +4,6 @@ import { Stack, Flex, Text } from '@mantine/core';
 import { Control, Controller } from 'react-hook-form';
 import { Input } from 'shared/components/Input';
 import { Select } from 'shared/components/Select';
-import { useEffect } from 'react';
 
 interface Props {
   result: IResult;
@@ -71,10 +70,6 @@ export const Edit = ({
             control={control}
             render={({ field }) => <Input field={field} />}
           />
-        </Stack>
-        <Stack w={354} spacing={9}>
-          <Text className={style.subtitle}>Телефон</Text>
-          <Text className={style.text}>{'Не выявлен'}</Text>
         </Stack>
       </Flex>
     </Stack>

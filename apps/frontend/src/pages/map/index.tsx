@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import AdminWrapper from 'shared/components/Wrappers/AdminWrapper';
-import { YMaps, Map, Clusterer, Placemark } from '@pbe/react-yandex-maps';
+import { YMaps } from '@pbe/react-yandex-maps';
 import { IResult } from 'shared/models/IResult';
 import axios from 'axios';
 import { Card } from 'shared/components/Card';
-import { Loader } from '@mantine/core';
+import { Flex, Loader, Stack, Text } from '@mantine/core';
+import { Map } from 'shared/components/Map';
+
+import style from './MapPage.module.scss';
 
 const MapPage = () => {
   const location = useLocation();
@@ -47,54 +50,34 @@ const MapPage = () => {
           load: 'package.full',
         }}
       >
-        <Card>
-          {markers.length ? (
-            <Map
-              defaultState={{
-                center: [markers[0].x, markers[0].y],
-                zoom: 9,
-                controls: ['zoomControl', 'fullscreenControl'],
-              }}
-              modules={['control.ZoomControl', 'control.FullscreenControl']}
-              width={1139}
-              height={'80vh'}
-            >
-              <Clusterer
-                options={{
-                  preset: 'islands#invertedGreenClusterIcons',
-                  groupByCoordinates: false,
+        <Flex gap={16}>
+          <Card>
+            {markers.length ? (
+              <Map markers={markers} w={1139} />
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '1139px',
+                  height: '80vh',
                 }}
               >
-                {markers.map((item, index) => (
-                  <Placemark
-                    key={index}
-                    defaultGeometry={[item.x, item.y]}
-                    modules={[
-                      'geoObject.addon.hint',
-                      'geoObject.addon.balloon',
-                    ]}
-                    options={{
-                      preset: 'islands#greenCircleDotIcon',
-                      iconImageSize: [16, 16],
-                    }}
-                  />
+                <Loader size={'xl'} color="grape.5" />
+              </div>
+            )}
+          </Card>
+          <Card h={'fit-content'} w={390}>
+            <Stack spacing={24}>
+              <Text className={style.title}>Выбранные адреса</Text>
+              {location.state &&
+                location.state?.result.map((item: IResult) => (
+                  <Text className={style.text}>{item.address}</Text>
                 ))}
-              </Clusterer>
-            </Map>
-          ) : (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '1139px',
-                height: '80vh',
-              }}
-            >
-              <Loader size={'xl'} color="grape.5" />
-            </div>
-          )}
-        </Card>
+            </Stack>
+          </Card>
+        </Flex>
       </YMaps>
       <></>
     </AdminWrapper>

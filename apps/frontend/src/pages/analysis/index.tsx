@@ -59,7 +59,7 @@ const AnalysisPage = () => {
       </Stack>
       <Stack spacing={10}>
         <AnalysisGuide />
-        <AnalysisPie />
+        <AnalysisPie result={result} />
       </Stack>
     </AdminWrapper>
   );

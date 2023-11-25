@@ -41,16 +41,16 @@ export const HistoryItem = ({ index, item }: Props) => {
           align={'center'}
           justify={'space-between'}
         >
-          <div>{item?.address}</div>
+          <div>{item?.address || 'Не выявлен'}</div>
           <IconChevronRight width={24} height={24} />
         </Flex>
       </Tag>
       <Tag color="#1A1B1E" p="16px" w="419px" text="1" h="68px">
-        <Tags tags={item?.tags} />
+        {item.tags?.length ? <Tags tags={item?.tags} /> : 'Не выявлены'}
       </Tag>
       <Tag
         color="#1A1B1E"
-        text={`${item?.date ? item.date : 'Не выявлено'}`}
+        text={`${item?.date ? item.date : 'Не выявлена'}`}
         p="16px"
         h="68px"
         w="181px"
