@@ -47,8 +47,8 @@ export const PieDiagram = ({ keys }: Props) => {
 
   useEffect(() => {
     if (watch('category')) {
-      const label = theme[watch('category')].map((item) => item.label);
-      const value = theme[watch('category')].map((item) => +item.value);
+      const label = theme[watch('category')]?.map((item) => item.label);
+      const value = theme[watch('category')]?.map((item) => +item.value);
       setDiagramData({ label: label, value: value });
     }
   }, [watch('category')]);
