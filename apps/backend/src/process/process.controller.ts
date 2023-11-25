@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Head, Header, Logger, Param, Post, StreamableFile, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ProcessService } from './process.service';
 import { ResultDto } from './dtos/result.dto';
 import { Express } from 'express'
@@ -11,7 +11,6 @@ export class ProcessController {
     constructor(
         private readonly processService: ProcessService
     ){}
-
 
     @Post('file')
     @UseInterceptors(FileInterceptor('file'))
@@ -27,6 +26,15 @@ export class ProcessController {
         return response
     }
 
+    @Header('Content-disposition', 'attachment; filename=anlikodullendirme.xlsx')
+    @Header('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    @Post('export')
+    public async exportTable(@Body() data: Record<string, any>)
+    {
+        const ids = data.ids
+        return new StreamableFile(await this.processService.createTable(ids))
+    }
+
     @Post('')
     public async processText(@Body() data: ResultDto)
     {
@@ -40,16 +48,16 @@ export class ProcessController {
         return this.processService.saveRecord(data)
     }
 
-    @Post(':id')
-    public async editRecord(@Param('id') id: number, @Body() data: ResultDto)
-    {
-        return this.processService.editRecord(id, data)
-    }
-
     @Get('history')
     public async getHistory()
     {
         return this.processService.getHistory()
+    }
+
+    @Post(':id')
+    public async editRecord(@Param('id') id: number, @Body() data: ResultDto)
+    {
+        return this.processService.editRecord(id, data)
     }
 
     @Get(':id')

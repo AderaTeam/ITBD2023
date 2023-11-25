@@ -4,6 +4,8 @@ import { In, Repository } from 'typeorm';
 import { Result } from './entities/result.entity';
 import { Tag } from './entities/tag.entity';
 import axios from "axios"
+import * as xlsx from 'node-xlsx'
+
 @Injectable()
 export class ProcessService {
 
@@ -13,6 +15,18 @@ export class ProcessService {
         @Inject('TAG_REPOSITORY')
         private tagRepository: Repository<Tag>,
     ){}
+
+    public async createTable(ids: number[])
+    {
+        const data = [['Полный текст обращения', 'Тема', 'Группа тем', 'Адрес', 'Исполнитель', 'Дата']]
+        const results = await this.resultRepository.find({where:{id: In(ids)}})
+        for(const obj of results)
+        {
+            data.push([obj.text, obj.category, obj.group, obj.address, obj.department, obj.dateMaking])
+        }
+        var table = xlsx.build([{name: "table", data: data, options:{}}])
+        return table
+    }
 
     public async editRecord(id: number, object: ResultDto,)
     {
@@ -60,7 +74,6 @@ export class ProcessService {
         }
         currentRecord.tags = rightTags
         return currentRecord.save()
-
     }
 
     public async getHistory()

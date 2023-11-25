@@ -17,6 +17,7 @@
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "compose-function": "^3.0.3",
+    "excel4node": "^1.8.2",
     "mobx": "^6.11.0",
     "mobx-react-lite": "^4.0.5",
     "node-xlsx": "^0.23.0",
