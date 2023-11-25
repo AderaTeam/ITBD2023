@@ -24,7 +24,8 @@ export class ProcessService {
         {
             data.push([obj.text, obj.category, obj.group, obj.address, obj.department, obj.dateMaking])
         }
-        var table = xlsx.build([{name: "table", data: data, options:{}}])
+        var table = xlsx.build([{name: "table", data: data, options:{'!cols': [{wch: 50},{wch: 75},{wch: 50},{wch: 50},{wch: 50},{wch: 50}]}}])
+        
         return table
     }
 
