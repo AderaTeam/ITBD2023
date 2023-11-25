@@ -28,6 +28,8 @@ async function bootstrap() {
       "http://www.adera-team.ru/",
       "https://www.adera-team.ru",
       "http://www.adera-team.ru",
+      "https://itbd.adera-team.ru",
+      "http://itbd.adera-team.ru/",
     ]
   })
   await app.listen(port);
