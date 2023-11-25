@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ANALYSIS_ROUTE, STATISTICS_ROUTE } from 'shared/constants/const';
 import { authRoutes, publicRoutes } from 'shared/constants/routes';
-import NavbarNested from '../widgets/navbar/Navbar';
+import NavbarNested from 'widgets/navbar/Navbar';
 
 export const Routing = observer(() => {
   const { UStore } = useContext(Context);
