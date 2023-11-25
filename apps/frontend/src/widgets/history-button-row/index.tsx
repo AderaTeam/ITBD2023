@@ -9,6 +9,7 @@ import {
   FieldValues,
   Controller,
   useForm,
+  UseFormWatch,
 } from 'react-hook-form';
 import { IResult } from 'shared/models/IResult';
 import { useNavigate } from 'react-router';
@@ -19,11 +20,13 @@ import HistoryServices from 'shared/services/HistoryServices';
 interface Props {
   result: IResult[];
   getValues: UseFormGetValues<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
 }
 
-export const HistoryButtonRow = ({ getValues, result }: Props) => {
+export const HistoryButtonRow = ({ getValues, result, watch }: Props) => {
   const navigate = useNavigate();
   const { control } = useForm();
+  const len = watch('analysis') || [];
 
   const handleMapLinkClick = () => {
     if (getValues('analysis')) {
@@ -42,7 +45,7 @@ export const HistoryButtonRow = ({ getValues, result }: Props) => {
   return (
     <Flex align={'flex-start'} justify={'space-between'}>
       <Flex gap={16}>
-        <Button outline onClick={handleMapLinkClick}>
+        <Button outline onClick={handleMapLinkClick} disabled={!len.length}>
           Смотреть на карте{' '}
           <IconExternalLink
             style={{ marginLeft: '8px' }}
@@ -50,7 +53,7 @@ export const HistoryButtonRow = ({ getValues, result }: Props) => {
             color="#2C2E33"
           />
         </Button>
-        <Button onClick={handleGetFile}>
+        <Button onClick={handleGetFile} disabled={!len.length}>
           Экспорт отчета{' '}
           <span className={style['button-text']}>&nbsp; .xlsx</span>
         </Button>

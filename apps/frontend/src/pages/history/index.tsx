@@ -9,7 +9,7 @@ import { HistoryTable } from 'widgets/history-table';
 
 const HistoryPage = () => {
   const [result, setResult] = useState<IResult[]>([]);
-  const { control, setValue, getValues } = useForm();
+  const { control, setValue, getValues, watch } = useForm();
 
   useEffect(() => {
     HistoryServices.getHistory().then((response) => setResult(response.data));
@@ -18,7 +18,7 @@ const HistoryPage = () => {
   return (
     <AdminWrapper fullWidth>
       <Stack spacing={16} w={1607}>
-        <HistoryButtonRow result={result} getValues={getValues} />
+        <HistoryButtonRow watch={watch} result={result} getValues={getValues} />
         {result.length ? (
           <HistoryTable control={control} setValue={setValue} result={result} />
         ) : (
