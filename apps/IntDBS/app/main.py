@@ -13,15 +13,23 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 import uvicorn
-from glob_values import *
+from glob_values import bad_patterns_to_tags_replaser, processing, exe_nums, exe_classes, model_theme, theme_group_nums, themes_num
 import csv
 import codecs
 from fastapi import Response
 from fastapi.encoders import jsonable_encoder
 import spacy
+
+from ml import RecGRUExample
+import __main__
+setattr(__main__, "RecGRUExample", RecGRUExample)
+# from ml import RecGRUExample
+
 nltk.download('stopwords')
 
 app = FastAPI()
+
+model_exe2 = torch.load('./Models/my_model_gru_exe.pt')
 app.add_middleware(
     CORSMiddleware,
     allow_origins=
@@ -51,8 +59,9 @@ class Com(BaseModel):
     executor: str
     theme_group: str
 
-# model_themes = torch.load('./Models/my_model_gru_group_theme.bin')
-# model_exe = torch.load('./Models/my_model_gru_exe.bin')
+model_theme_group = torch.load('./Models/my_model_gru_group_theme.bin', map_location=torch.device('cpu')).double().to('cpu')
+# model_theme_group.h1 = model_theme_group.h1.to('cpu')
+model_exe = torch.load('./Models/my_model_gru_exe.bin', map_location=torch.device('cpu')).double().to('cpu')
 nlp_place = spacy.load('./Models/nlp_place')
 nlp_prob = spacy.load('./Models/nlp_prob')
 

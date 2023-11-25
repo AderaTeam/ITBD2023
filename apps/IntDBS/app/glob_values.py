@@ -5,7 +5,7 @@ from string import punctuation
 import torch
 from transformers import AutoTokenizer, AutoModel
 import json
-
+from ml import RecGRUExample
 
 rus_stop_words = stopwords.words("russian")
 symbols = list(punctuation) + ['\t', '\n', '\r',
@@ -104,70 +104,33 @@ def processing(pair):
     return mean_pooling(k, e['attention_mask'])[0]
 
 
-class RecGRUExample(torch.nn.Module):
-    def __init__(
-        self,
-        size_of_sample: int,
-        num_of_samples: int,
-        output_size_of_input_layer: int,
-        output_layer_size: int,
-        alpha: float = 5
-    ):
-        
-        super(RecGRUExample, self).__init__()
-        self.alpha = alpha
-        self.input_size_of_input_layer = size_of_sample
-        self.output_size_of_input_layer = output_size_of_input_layer
-        self.num_layers_of_input_layer = int(num_of_samples / (alpha * (self.input_size_of_input_layer + self.output_size_of_input_layer)))+1
-        self.output_layer_size = output_layer_size
-        self.num_of_samples = num_of_samples
 
-        self.input_layer = torch.nn.GRU(
-            input_size=self.input_size_of_input_layer,
-            hidden_size=self.output_size_of_input_layer,
-            num_layers=self.num_layers_of_input_layer,
-            # bidirectional = True
-        )
-        self.output_layer = torch.nn.Conv1d(
-            self.num_of_samples,
-            self.output_layer_size,
-            self.output_size_of_input_layer,
-        )
+# # RecGRUExample = RecGRUExample
+# # model_exe2 = torch.load('./Models/my_model_gru_exe.pt')
+# model_exe = model_GRU = RecGRUExample(
+#     size_of_sample=384,
+#     num_of_samples=128,
+#     output_size_of_input_layer=50,
+#     output_layer_size=10,
+#     alpha=0.07
+# ).double().to('cpu')
+# # print(model_exe.input_layer.get_weights())
+# model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe22222.pt', map_location=torch.device('cpu')), strict=False)
+# model_exe.eval()
+# model_exe.h1 = model_exe.h1.to('cpu')
 
-        self.input_activation = torch.nn.Tanh()
-        self.h1 = torch.zeros(self.num_layers_of_input_layer, self.num_of_samples, self.output_size_of_input_layer).double().to('cpu')
+# print(model_exe)
 
-    def forward(self, x):
-        y, h_r = self.input_layer(x, self.h1)
-        # print(y.shape)
-        y = self.input_activation(y)
-        y = self.output_layer(y)
-        return y.view(y.shape[0], y.shape[1])
-
-
-
-# model_exe2 = torch.load('./Models/my_model_gru_exe22222.pt')
-model_exe = model_GRU = RecGRUExample(
-    size_of_sample=384,
-    num_of_samples=128,
-    output_size_of_input_layer=50,
-    output_layer_size=10,
-    alpha=0.07
-).double().to('cpu')
-model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe22222.pt', map_location=torch.device('cpu')), strict=False)
-model_exe.eval()
-model_exe.h1 = model_exe.h1.to('cpu')
-
-model_theme_group = model_GRU = RecGRUExample(
-    size_of_sample=384,
-    num_of_samples=128,
-    output_size_of_input_layer=50,
-    output_layer_size=10,
-    alpha=0.07
-).double().to('cpu')
-model_theme_group.load_state_dict(torch.load('./Models/my_model_gru_group_theme22222.pt', map_location=torch.device('cpu')), strict=False)
-model_theme_group.eval()
-model_theme_group.h1 = model_theme_group.h1.to('cpu')
+# model_theme_group = model_GRU = RecGRUExample(
+#     size_of_sample=384,
+#     num_of_samples=128,
+#     output_size_of_input_layer=50,
+#     output_layer_size=10,
+#     alpha=0.07
+# ).double().to('cpu')
+# model_theme_group.load_state_dict(torch.load('./Models/my_model_gru_group_theme22222.pt', map_location=torch.device('cpu')), strict=False)
+# model_theme_group.eval()
+# model_theme_group.h1 = model_theme_group.h1.to('cpu')
 
 model_theme = model_GRU = RecGRUExample(
     size_of_sample=384,
@@ -177,5 +140,5 @@ model_theme = model_GRU = RecGRUExample(
     alpha=0.07
 ).double().to('cpu')
 model_theme.h1 = model_theme.h1.to('cpu')
-# model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe.bin'))
-# model_exe.eval()
+# # model_exe.load_state_dict(torch.load('./Models/my_model_gru_exe.bin'))
+# # model_exe.eval()
