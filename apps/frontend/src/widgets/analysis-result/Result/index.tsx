@@ -16,50 +16,46 @@ interface Props {
   result: IResult;
   index: number;
   getResult: Function;
+  ids: number[];
+  departments: { value: string; label: string }[];
+  group: { value: string; label: string }[];
+  category: { value: string; label: string }[];
+  data: IType;
+  setCategory: React.Dispatch<
+    React.SetStateAction<
+      {
+        value: string;
+        label: string;
+      }[]
+    >
+  >;
 }
 
-export const Result = ({ result, index, getResult }: Props) => {
+export const Result = ({
+  result,
+  index,
+  getResult,
+  ids,
+  group,
+  category,
+  departments,
+  data,
+  setCategory,
+}: Props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const { control, handleSubmit, watch, setValue } = useForm({
     defaultValues: result,
   });
-  const [group, setGroup] = useState<{ value: string; label: string }[]>([]);
-  const [category, setCategory] = useState<{ value: string; label: string }[]>(
-    []
-  );
-  const [data, setData] = useState<IType>();
-  const [departments, setDepartments] = useState<
-    { value: string; label: string }[]
-  >([]);
 
   const onSubmit = handleSubmit((formData) => {
     AnalysisServices.upadateAnalysis(formData).then(() => {
-      getResult(result.id, true);
+      if (ids.length) {
+        getResult(undefined, true, ids);
+      } else {
+        getResult(result.id, true);
+      }
     });
   });
-
-  const getTypesEnum = () => {
-    AnalysisServices.getTypesEnum().then((response) => {
-      setData(response.data);
-      setGroup(
-        Object.keys(response.data).map((item) => {
-          return { value: item, label: item };
-        })
-      );
-      setCategory(Object.values(response.data).flat());
-    });
-  };
-
-  const getDepartamentsEnum = () => {
-    AnalysisServices.getDepartamentsEnum().then((response) => {
-      setDepartments(response.data);
-    });
-  };
-
-  useEffect(() => {
-    getTypesEnum();
-    getDepartamentsEnum();
-  }, []);
 
   useEffect(() => {
     if (data && watch('group')) {

@@ -19,20 +19,43 @@ const AnalysisPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
-  const getResult = (id: number, step?: number) => {
-    AnalysisServices.getAnalysisResult(id)
-      .then((response) => {
-        step ? AStore.setCurentStep(2) : AStore.setCurentStep(1);
-        setResult(response.data);
-      })
-      .finally(() => setIsLoading(false));
+  const getResult = (id?: number, step?: number, ids?: number[]) => {
+    if (id) {
+      AnalysisServices.getAnalysisResult(id)
+        .then((response) => {
+          step ? AStore.setCurentStep(2) : AStore.setCurentStep(1);
+          setResult(response.data);
+        })
+        .finally(() => setIsLoading(false));
+    } else if (ids) {
+      try {
+        const arr: IResult[][] = [];
+        setResult([]);
+        ids.map((id) => {
+          AnalysisServices.getAnalysisResult(id).then((response) => {
+            step ? AStore.setCurentStep(2) : AStore.setCurentStep(1);
+            setResult((pervState) => [...pervState, response.data[0]]);
+          });
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   const onSubmit = handleSubmit((formData) => {
     setIsLoading(true);
-    AStore.setAnalysis(formData.text).then((response) => {
-      getResult(response?.data!);
-    });
+    if (formData.text) {
+      AStore.setAnalysisText(formData.text).then((response) => {
+        getResult(response?.data!);
+      });
+    } else {
+      const data = new FormData();
+      data.append('file', formData.file);
+      AStore.setAnalysisFile(data).then((response) => {
+        getResult(undefined, undefined, response?.data);
+      });
+    }
   });
 
   useEffect(() => {

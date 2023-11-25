@@ -4,8 +4,18 @@ import { IResult } from 'shared/models/IResult';
 import { IType } from 'shared/models/ITypes';
 
 export default class AnalysisServices {
-  static async setAnalysis(text?: string): Promise<AxiosResponse<number>> {
+  static async setAnalysisText(text?: string): Promise<AxiosResponse<number>> {
     return $api.post<number>('/process', { text });
+  }
+
+  static async setAnalysisFile(
+    file?: FormData
+  ): Promise<AxiosResponse<number[]>> {
+    return $api.post<number[]>('/process/file', file, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   }
 
   static async getAnalysisResult(
